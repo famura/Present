@@ -4,9 +4,9 @@ Presentations based on `reveal.js`.
 
 ## Setup
 Create the symlinks in oder to make the plugins reachable for `reveal.js`.
-```commandline
+```shell
 cd PROJECT_DIR
-./create_symlinks.sh
+./setup.sh
 ```
 
 ### Notes
