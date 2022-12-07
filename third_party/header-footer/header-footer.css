@@ -75,11 +75,12 @@
   text-align: center;
   letter-spacing: 0em;
   padding-top: 0.5vh;
-  padding-bottom: 0.5vh; /*actually we want sth like 1.0vh to match the header padding, but with the progress bar it is visually the same*/
+  padding-bottom: 0.5vh;
+  /*actually we want sth like 1.0vh to match the header padding, but with the progress bar it is visually the same*/
 }
 
 /* Bottom position for the slide-footer footer when both progress bar and TOC-Progress are visible */
-div.progress[style="display: block;"] ~ #slide-footer {
+div.progress[style="display: block;"]~#slide-footer {
   bottom: calc(3px + 10.5vh);
 }
 
@@ -97,11 +98,12 @@ div.progress[style="display: block;"] ~ #slide-footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%; /*mind the sizes of the left and right footer divs*/
+  width: 80%;
+  /*mind the sizes of the left and right footer divs*/
 }
 
 /* Bottom position for the slide-footer footer when progress bar (height = 3px) is visible */
-div.progress[style="display: block;"] ~ footer:last-of-type#slide-footer {
+div.progress[style="display: block;"]~footer:last-of-type#slide-footer {
   bottom: 5px;
 }
 
