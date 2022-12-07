@@ -1,12 +1,12 @@
-[submodule "reveal.js"]
-	path = third_party/reveal.js
-	url = https://github.com/hakimel/reveal.js.git
-[submodule "MathJax"]
+[submodule "third_party/MathJax"]
 	path = third_party/MathJax
 	url = https://github.com/mathjax/MathJax.git
-[submodule "d3js"]
+[submodule "third_party/reveal.js"]
+	path = third_party/reveal.js
+	url = https://github.com/hakimel/reveal.js.git
+[submodule "third_party/d3js"]
 	path = third_party/d3js
 	url = https://github.com/jlegewie/reveal.js-d3js-plugin
-[submodule "diagram"]
+[submodule "third_party/diagram"]
 	path = third_party/diagram
 	url = https://github.com/teone/reveal.js-diagram-plugin
