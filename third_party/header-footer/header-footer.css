@@ -80,7 +80,7 @@
 }
 
 /* Bottom position for the slide-footer footer when both progress bar and TOC-Progress are visible */
-div.progress[style="display: block;"]~#slide-footer {
+div.progress[style="display: block;"] ~ #slide-footer {
   bottom: calc(3px + 10.5vh);
 }
 
@@ -103,7 +103,7 @@ div.progress[style="display: block;"]~#slide-footer {
 }
 
 /* Bottom position for the slide-footer footer when progress bar (height = 3px) is visible */
-div.progress[style="display: block;"]~footer:last-of-type#slide-footer {
+div.progress[style="display: block;"] ~ footer:last-of-type#slide-footer {
   bottom: 5px;
 }
 

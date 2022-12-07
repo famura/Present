@@ -53,7 +53,6 @@ slide_header.getElementsByTagNames = slide_footer.getElementsByTagNames;
 slide_footer.initialize = function (title, background, slideNumber = true) {
 
     // Link to the Slide-Footer CSS
-
     var link = document.createElement("link");
     link.href = "third_party/header-footer/header-footer.css";
     link.type = "text/css";
@@ -61,7 +60,6 @@ slide_footer.initialize = function (title, background, slideNumber = true) {
     document.getElementsByTagName("head")[0].appendChild(link);
 
     // Initialize properties according to parameters
-
     this.background = background || 'rgba(0,0,0,0.1)';
     var title = title || '';
     if (title != '') {
@@ -82,7 +80,6 @@ slide_footer.initialize = function (title, background, slideNumber = true) {
     };
 
     // Create the Slide-Footer footer
-
     var slide_footer = document.createElement('footer');
     slide_footer.setAttribute('id', 'slide-footer');
     slide_footer.setAttribute('style', 'background:' + this.background);

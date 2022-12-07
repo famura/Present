@@ -3,10 +3,11 @@
  * Author: Fabio Muratore http://github.com/famura
  *
  * Based on the blood theme from reveal.js
- * Author: Walther http://github.com/Walther
+ * Author: Veeti Haapsamo  http://github.com/Walther
  *********************************************/
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,700,300italic,700italic);
+
 section.has-light-background,
 section.has-light-background h1,
 section.has-light-background h2,
@@ -14,62 +15,70 @@ section.has-light-background h3,
 section.has-light-background h4,
 section.has-light-background h5,
 section.has-light-background h6 {
-  color: #222;
+  color: var(--dark-background-color);
 }
 
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 :root {
-  --background-color: #222;
-  --main-font: Ubuntu, sans-serif;
-  --main-font-size: 34px;
-  --main-color: #f2f2f2;
+  --font: Ubuntu, sans-serif;
+  --font-size: 34px;
   --block-margin: 20px;
   --heading-margin: 0 0 20px 0;
   --heading-font: Ubuntu, sans-serif;
-  --heading-color: #f2f2f2;
   --heading-line-height: 1.2;
   --heading-letter-spacing: normal;
   --heading-text-transform: uppercase;
   --heading-text-shadow: none; /* 2px 2px 2px #222 */
   --heading-font-weight: normal;
-  --heading1-text-shadow: none; /* 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
-  0 20px 20px rgba(0, 0, 0, 0.15) */
-  --heading1-size: 3.77em;
-  --heading2-size: 2.11em;
-  --heading3-size: 1.55em;
-  --heading4-size: 1em;
+  --heading1-text-shadow: none;
+  /* --heading1-text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15); */
+  --heading1-size: 2.85em;
+  --heading2-size: 2em;
+  --heading3-size: 1.5em;
+  --heading4-size: 1.17em;
+  --heading5-size: 1em;
+  --heading6-size: 0.83em;
   --code-font: monospace;
+  --dark-background-color: #222;
+  --dark-text-color: #222;
+  --bright-text-color: #f2f2f2;
+  --title-color: #f6b26b; /* #ff5500 */
+  --heading-color: #f6b26b;
   --link-color: #a23;
   --link-color-hover: #dd5566;
   --selection-background-color: #a23;
   --selection-color: #fff;
-  --light-background-color: #d7d7d7; /* framuralightgrey */
+  --bright-background-color: #d7d7d7;
+  --author-color: #47abd3;
+  --highlight-green-color: #bdecb6;
+  --highlight-red-color: #cc3a1d;
+  --highlight-bright-red-color: #ee4422;
+  --highlight-purple-color: #9b6dbd;
+  --highlight-grey-color: #b4b4b4;
+  --bone-color: #e0d6ce;
+  --dark-grey-color: #2c3437;
+  --dark-purple-color: #854aac;
+  --dark-blue-color: #3333b3;
 }
 
 .reveal-viewport {
-  background: #222;
-  background-color: #222;
+  background: var(--dark-background-color);
+  background-color: var(--dark-background-color);
 }
 
-/* Font */
 .reveal {
-  font-family: Ubuntu, "sans-serif";
-  font-size: 34px;
+  font-family: var(--font);
+  font-size: var(--font-size);
   font-weight: normal;
-  color: #f2f2f2;
+  color: var(--bright-text-color);
 }
 
-.reveal ::selection {
-  color: #fff;
-  background: #a23;
-  text-shadow: none;
-}
-
+.reveal ::selection,
 .reveal ::-moz-selection {
-  color: #fff;
-  background: #a23;
+  color: var(--selection-color);
+  background: var(--selection-background-color);
   text-shadow: none;
 }
 
@@ -80,69 +89,10 @@ section.has-light-background h6 {
 }
 
 /*********************************************
- * Colors
- *********************************************/
-.famuraorange {
-  color: #f6b26b; /* #ff5500 */
-}
-
-.famurared {
-  color: #cc3a1d; /* #e65231 */
-}
-
-.famurabrightred {
-  color: #ee4422; /* #ee4422 */
-}
-
-.famurabrightgreen {
-  color: #bdecb6; /* #cfffe5 */
-}
-
-.famurablue {
-  color: #47abd3; /* #87ceeb */
-}
-
-.famuradarkblue {
-  color: #3333b3;
-}
-
-.famurapurple {
-  color: #854aac;
-}
-
-.famurabrightpurple {
-  color: #9b6dbd;
-}
-
-.famurawhite {
-  color: #f2f2f2;
-}
-
-.famuralightgrey {
-  color: #d7d7d7;
-}
-
-.famuragrey {
-  color: #b4b4b4; /* fragment highlight grey */
-}
-
-.famuradarkgrey {
-  color: #2c3437; /* a bit green */
-}
-
-.famurabone {
-  color: #e0d6ce; /* a bit more grey, #eddac9 */
-}
-
-.famuraorange {
-  color: #f6b26b; /* heading color */
-}
-
-/*********************************************
  * Title
  *********************************************/
 .reveal .title {
-  color: #f6b26b; /* #ff5500 */
+  color: var(--title-color);
   text-transform: uppercase;
 }
 
@@ -155,45 +105,40 @@ section.has-light-background h6 {
 .reveal h4,
 .reveal h5,
 .reveal h6 {
-  margin: 0 0 20px 0;
-  color: #f6b26b;
-  font-family: Ubuntu, "sans-serif";
-  font-weight: normal;
-  line-height: 1.2;
-  letter-spacing: normal;
-  text-shadow: none; /* 2px 2px 2px #222 */
+  margin: var(--heading-margin);
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-weight: var(--heading-font-weight);
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: var(--heading-text-transform);
+  text-shadow: var(--heading-text-shadow);
   word-wrap: break-word;
 }
 
 /* For default HTML5 header sizes see https://html.spec.whatwg.org/multipage/rendering.html#sections-and-headings */
 /* Here, I shifted them by one, and extrapolated h1. */
 .reveal h1 {
-  font-size: 2.85em;
+  font-size: var(--heading1-size);
 }
-
 .reveal h2 {
-  font-size: 2em;
+  font-size: var(--heading2-size);
 }
-
 .reveal h3 {
-  font-size: 1.5em;
+  font-size: var(--heading3-size);
 }
-
 .reveal h4 {
-  font-size: 1.17em;
+  font-size: var(--heading4-size);
 }
-
 .reveal h5 {
-  font-size: 1em;
+  font-size: var(--heading5-size);
 }
-
 .reveal h6 {
-  font-size: 0.83em;
+  font-size: var(--heading6-size);
 }
 
 .reveal h1 {
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
-    0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15);
+  text-shadow: var(--heading1-text-shadow);
 }
 
 /* Remove trailing margins after titles */
@@ -210,7 +155,7 @@ section.has-light-background h6 {
 * OTHER
 *********************************************/
 .reveal p {
-  margin: 20px 0;
+  margin: var(--block-margin);
   line-height: 1.3;
 }
 
@@ -263,11 +208,21 @@ section.has-light-background h6 {
   margin-left: 30px;
 }
 
+/*********************************************
+ * In-Line Descriptive List
+ * from https://stackoverflow.com/questions/1713048/how-to-style-dt-and-dd-so-they-are-on-the-same-line
+ *********************************************/
+.reveal dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
 .reveal dt {
+  grid-column-start: 1;
   font-weight: bold;
 }
-
 .reveal dd {
+  grid-column-start: 2;
+  margin-bottom: 10px; /*<p> has a top and bottom margin of 10px*/
   margin-left: 30px;
 }
 
@@ -275,7 +230,7 @@ section.has-light-background h6 {
   display: block;
   position: relative;
   width: 70%;
-  margin: 20px auto;
+  margin: var(--block-margin) auto;
   padding: 5px;
   font-style: italic;
   background: rgba(255, 255, 255, 0.05);
@@ -295,18 +250,19 @@ section.has-light-background h6 {
   display: block;
   position: relative;
   width: 90%;
-  margin: 20px auto;
+  margin: var(--block-margin) auto;
   text-align: left;
   font-size: 0.55em;
-  font-family: monospace;
+  font-family: var(--code-font);
   line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .reveal code {
-  font-family: monospace;
+  font-family: var(--r-code-font);
   text-transform: none;
+  tab-size: 2;
 }
 
 .reveal pre code {
@@ -315,6 +271,14 @@ section.has-light-background h6 {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
+}
+
+.reveal .code-wrapper {
+  white-space: normal;
+}
+
+.reveal .code-wrapper code {
+  white-space: pre;
 }
 
 .reveal sup {
@@ -339,7 +303,7 @@ section.has-light-background h6 {
 }
 
 .reveal img {
-  margin: 20px 0; /*former: 20px*/
+  margin: var(--block-margin) 0;
 }
 
 /*********************************************
@@ -381,27 +345,27 @@ section.has-light-background h6 {
 * Links
 *********************************************/
 .reveal a {
-  color: #a23;
+  color: var(--link-color);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .reveal a:hover {
-  color: #dd5566;
+  color: var(--link-color-hover);
   text-shadow: none;
   border: none;
 }
 
 .reveal .roll span:after {
   color: #fff;
-  background: #6a1520;
+  background: var(--link-color-dark);
 }
 
 /*********************************************
 * Frame Helper
 *********************************************/
 .reveal .r-frame {
-  border: 4px solid #f2f2f2;
+  border: 4px solid var(--bright-text-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -410,7 +374,7 @@ section.has-light-background h6 {
 }
 
 .reveal a:hover .r-frame {
-  border-color: #a23;
+  border-color: var(--link-color);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
@@ -419,7 +383,10 @@ section.has-light-background h6 {
 *********************************************/
 .reveal .controls {
   background: rgba(0, 0, 0, 0); /* transparent */
-  color: #a23;
+  color: var(--link-color);
+}
+.reveal .controls button {
+  color: var(--link-color);
 }
 
 /*********************************************
@@ -427,8 +394,7 @@ section.has-light-background h6 {
 *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0); /* transparent */
-  color: #a23;
-
+  color: var(--link-color);
   height: 4px; /*original: 3px*/
 }
 
@@ -437,7 +403,7 @@ section.has-light-background h6 {
 *********************************************/
 @media print {
   .backgrounds {
-    background-color: #222;
+    background-color: var(--dark-background-color);
   }
 }
 
@@ -450,7 +416,9 @@ section.has-light-background p,
 section.has-light-background h1,
 section.has-light-background h2,
 section.has-light-background h3,
-section.has-light-background h4 {
+section.has-light-background h4,
+section.has-light-background h5,
+section.has-light-background h6 {
   text-shadow: none;
 }
 
@@ -464,7 +432,7 @@ section.has-light-background h4 {
 }
 
 .reveal p code {
-  background-color: #222;
+  background-color: var(--dark-background-color);
   display: inline-block;
   border-radius: 7px;
 }
@@ -481,8 +449,11 @@ section.has-light-background h4 {
   font-size: 3.5vh;
   right: 12px;
   bottom: 0px;
-  color: #a23;
+  color: var(--link-color);
   background: rgba(0, 0, 0, 0); /* transparent */
+}
+.reveal .slide-number-delimiter {
+  margin: 0 1px;
 }
 
 /*********************************************
@@ -502,7 +473,7 @@ section.has-light-background h4 {
   visibility: inherit;
 }
 .reveal .slides section .fragment.highlight-famurabrightgreen.visible {
-  color: #bdecb6;
+  color: var(--highlight-green-color);
 }
 
 .reveal .slides section .fragment.highlight-grey {
@@ -510,17 +481,17 @@ section.has-light-background h4 {
   visibility: inherit;
 }
 .reveal .slides section .fragment.highlight-grey.visible {
-  color: #b4b4b4;
+  color: var(--highlight-grey-color);
 }
 
 /*********************************************
  * Chapter Break Slides
- * usage: <section data-background-color="var(--light-background-color)" class="newchap">
- *        If you use the color directly, i.e., <section data-background-color="#d7d7d7",
- *        reveal.js will notice that you selected a light background and thus change the colors ect
+ * usage: <section data-background-color="var(--bright-background-color)" data-footer-class="newchap" class="newchap">
+ * note: reveal.js will notice that you selected a light background and thus change the colors ect
+         Do NOT set background or background-color since this leads to slow transitions with different speeds.
  *********************************************/
 .reveal .newchap {
-  color: #222;
+  color: var(--dark-text-color);
 }
 
 .reveal .newchap h1,
@@ -529,7 +500,7 @@ section.has-light-background h4 {
 .reveal .newchap h4,
 .reveal .newchap h5,
 .reveal .newchap h6 {
-  color: #a23;
+  color: var(--link-color);
 }
 
 /*********************************************
@@ -571,7 +542,7 @@ section.has-light-background h4 {
 }
 
 .reveal .authorname {
-  color: #47abd3; /* #famurablue */
+  color: var(--author-color);
 }
 
 /*********************************************
@@ -602,22 +573,6 @@ section.has-light-background h4 {
 }
 
 /*********************************************
- * In Line Descriptive List
- * from https://stackoverflow.com/questions/1713048/how-to-style-dt-and-dd-so-they-are-on-the-same-line
- *********************************************/
-.reveal dl {
-  display: grid;
-  grid-template-columns: max-content auto;
-}
-.reveal dt {
-  grid-column-start: 1;
-}
-.reveal dd {
-  grid-column-start: 2;
-  margin-bottom: 10px; /*<p> has a top and bottom margin of 10px*/
-}
-
-/*********************************************
  * Arranging
  * from https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  *********************************************/
@@ -642,7 +597,7 @@ section.has-light-background h4 {
   justify-content: flex-end; /* define how is distributed the remaining space */
 }
 
-reveal .flex-container-row-center {
+.reveal .flex-container-row-center {
   display: flex; /* first create a flex layout context */
   flex-flow: row nowrap; /* define the flow direction and if we allow the items to wrap */
   align-items: center; /* vertically alignment */
