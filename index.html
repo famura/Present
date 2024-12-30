@@ -7,7 +7,7 @@
 
 		<!-- Presentation-specific information -->
 		<meta name="author" content="Dr. Fabio Muratore" />
-		<meta name="description" content="Presentation Template" />
+		<meta name="description" content="Time Encoding: (New) Approaches to an Old Problem" />
 		<title></title>
 
 		<!-- Load a specific math font for MathJax (load this before reveal) -->
@@ -59,65 +59,219 @@
 
 				<section>
 					<h2>What's the issue?</h2>
-
-					<table>
-						<thead>
-							<tr>
-								<th>Time</th>
-								<th>Feature 1</th>
-								<th>...</th>
-								<th>Feature N</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>2023-10-01 12:00:00</td>
-								<td>0.5</td>
-								<td>...</td>
-								<td>-0.8</td>
-							</tr>
-							<tr>
-								<td>2023-10-01 12:00:01</td>
-								<td>-0.6</td>
-								<td>...</td>
-								<td>0.07</td>
-							</tr>
-							<tr>
-								<td>2023-10-01 12:00:02</td>
-								<td>240.4</td>
-								<td>...</td>
-								<td>-93.9</td>
-							</tr>
-							<tr>
-								<td class="highlight-red">2023-10-01 12:07:14</td>
-								<td>-0.3</td>
-								<td>...</td>
-								<td>/0.6</td>
-							</tr>
-							<tr>
-								<td>2023-10-01 12:07:15</td>
-								<td class="highlight-blue">0.00007</td>
-								<td>...</td>
-								<td class="highlight-blue">1823450</td>
-							</tr>
-							<tr>
-								<td>2023-10-01 12:07:16</td>
-								<td>-0.91238</td>
-								<td>...</td>
-								<td>0.42234</td>
-							</tr>
-							<tr>
-								<td class="highlight-red">2023-10-01 12:08:23</td>
-								<td class="highlight-blue">0.000019</td>
-								<td>...</td>
-								<td class="highlight-blue">-99862.3</td>
-							</tr>
-						</tbody>
-					</table>
+					<div id="table-container" href="table.html"></div>
 				</section>
 
-				<section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Creation</h2>
+					<p>Encode each time step (independently): $\RR^{T} \rightarrow \RR^{T \times d_{feat}}$ </br> e.g. day of month or absolute time since reference date</p>
+					<div
+						class="r-vstack"
+						style="
+							position: absolute;
+							left: 0;
+							display: flex;
+							flex-direction: column;
+							justify-content: flex-end;
+						"
+					>
+						<div style="display: flex; align-items: center">
+							<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
+							<span>&#8658;</span>
+							<div
+								data-id="box1"
+								style="background: red; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
+							></div>
+						</div>
+						<div style="display: flex; align-items: center">
+							<span style="width: 320px; display: inline-block">2023-10-01 12:07:15</span>
+							<span>&#8658;</span>
+							<div
+								data-id="box2"
+								style="background: yellow; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
+							></div>
+						</div>
+						<div style="display: flex; align-items: center">
+							<span style="width: 320px; display: inline-block">&vellip;</span>
+							<span>&#8658;</span>
+							<div
+								data-id="box3"
+								style="background: cyan; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
+							></div>
+						</div>
+						<div style="display: flex; align-items: center">
+							<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
+							<span>&#8658;</span>
+							<div
+								data-id="box4"
+								style="
+									background: darkmagenta;
+									width: 50px;
+									height: 50px;
+									margin: 5px;
+									border-radius: 5px;
+								"
+							></div>
+						</div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Creation</h2>
+					<p>Combining the encoded values: $\RR^{T \times d_{feat}} \rightarrow \RR^{T \times d_{model}}$  </br>e.g. linear layer</p>
+					<div class="r-stack justify-center">
+						<!-- <div
+							data-id="box6"
+							data-auto-animate-delay="0.6"
+							style="
+								background: radial-gradient(circle at top left, red, transparent) 0 0,
+									radial-gradient(circle at top right, blue, transparent) 100% 0,
+									radial-gradient(circle at bottom right, yellow, transparent) 100% 100%,
+									radial-gradient(circle at bottom left, green, transparent) 0 100%;
+								background-size: 50% 50%;
+								background-repeat: no-repeat;
+								width: 200px;
+								height: 200px;
+								border-radius: 10px;
+							"
+						></div> -->
+						<div style="position: relative; width: 200px; height: 200px; border-radius: 10px">
+							<div
+								data-id="box1"
+								style="
+									position: absolute;
+									top: 0;
+									left: 0;
+									background: radial-gradient(circle at top left, red, transparent);
+									width: 100px;
+									height: 100px;
+									border-top-left-radius: 10px;
+								"
+							></div>
+							<div
+								data-id="box2"
+								style="
+									position: absolute;
+									top: 0;
+									right: 0;
+									background: radial-gradient(circle at top right, yellow, transparent);
+									width: 100px;
+									height: 100px;
+									border-top-right-radius: 10px;
+								"
+							></div>
+							<div
+								data-id="box3"
+								style="
+									position: absolute;
+									bottom: 0;
+									left: 0;
+									background: radial-gradient(circle at bottom left, cyan, transparent);
+									width: 100px;
+									height: 100px;
+									border-bottom-left-radius: 10px;
+								"
+							></div>
+							<div
+								data-id="box4"
+								style="
+									position: absolute;
+									bottom: 0;
+									right: 0;
+									background: radial-gradient(circle at bottom right, darkmagenta, transparent);
+									width: 100px;
+									height: 100px;
+									border-bottom-right-radius: 10px;
+								"
+							></div>
+              <div
+								data-id="box5"
+								style="
+									position: absolute;
+									bottom: 0;
+									right: 0;
+									background: transparent;
+									width: 100px;
+									height: 100px;
+								"
+							></div>
+              <div
+								data-id="box6"
+								style="
+									position: absolute;
+									bottom: 0;
+									right: 0;
+									background: transparent;
+									width: 100px;
+									height: 100px;
+								"
+							></div>
+						</div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Creation</h2>
+					<div class="r-vstack">
+						<div
+							data-id="box1"
+							style="
+								background: rgb(255, 115, 0);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+						<div
+							data-id="box2"
+							style="
+								background: rgb(135, 218, 204);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+						<div
+							data-id="box3"
+							style="
+								background: rgb(105, 18, 18);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+						<div
+							data-id="box4"
+							style="
+								background: rgb(52, 36, 145);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+						<div
+							data-id="box5"
+							style="
+								background: rgb(255, 159, 159);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+						<div
+							data-id="box6"
+							style="
+								background: rgb(105, 156, 130);
+								width: 50px;
+								height: 50px;
+								margin: 5px;
+								border-radius: 5px;
+							"
+						></div>
+					</div>
 				</section>
 
 				<section>
@@ -196,6 +350,25 @@
 		<script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
 		<!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
 		<!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
+		<!-- <script src="third_party/reveald3/reveald3.js"></script> -->
+		<script>
+			// Custom script to load a table from an external file. Example:
+			//   <div id="table-container" data-filename="table.html"></div>
+			// Get the filename from the href attribute
+			const filename = document.getElementById("table-container").getAttribute("href");
+			/// Load the content of the file into the div
+			fetch(`content/tables/${filename}`)
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+					return response.text();
+				})
+				.then((data) => {
+					document.getElementById("table-container").innerHTML = data;
+				})
+				.catch((error) => console.error("Error loading content:", error));
+		</script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -204,7 +377,7 @@
 				controls: true, // controls
 				progress: true, // progress bar
 				history: true, // push each slide change to the browser history, implies hash: true
-				// width: '60%',  // weird scaling of the textwidth
+				// width: "100%", // weird scaling of the \textwidth
 				center: true, // center vertically
 				transition: "slide", // https://revealjs.com/transitions/
 				slideNumber: "h.v", // https://revealjs.com/slide-numbers/
@@ -232,8 +405,20 @@
 						// https://docs.mathjax.org/en/v2.7-latest/options/output-processors/HTML-CSS.html#configure-html-css
 						scale: 80, // adjusts the container of mathjax equations
 					},
+					// reveald3: {
+					// 	// See doc at https://github.com/gcalmettes/reveal.js-d3
+					// 	runLastState: false, // default: true
+					// 	onSlideChangedDelay: 200, // in ms, default: 0
+					// },
 				},
-				plugins: [RevealZoom, RevealSearch, RevealMath, RevealHighlight], // https://revealjs.com/plugins/
+				plugins: [
+					// https://revealjs.com/plugins/
+					RevealZoom,
+					RevealSearch,
+					RevealMath,
+					RevealHighlight,
+					// Reveald3,
+				],
 
 				dependencies: [
 					// { src: 'third_party/reveal.js/plugin/math/math.js', async: true }, // loads MathJax from the internet if not specified above (math: { ... mathjax: ... ) )
@@ -253,7 +438,7 @@
 									background: "rgba(170, 34, 51, 0)", // = #a23
 									// logoRight: "./content/logos/XYZ.png",
 									// logoLeft: "./content/logos/XYZ.png",
-									text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2022-12-13",
+									text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-31",
 								},
 							});
 						},

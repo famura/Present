@@ -13,7 +13,7 @@
  *********************************************/
 :root {
   --font: Ubuntu, sans-serif;
-  --font-size: 34px;
+  --font-size: 34px; /* 34px without commenting in width: "100%" in index.html */
   --block-margin: 20px;
   --heading-margin: 0 0 20px 0;
   --heading-font: Ubuntu, sans-serif;
@@ -331,7 +331,6 @@ section.has-light-background h6 {
 .reveal table td {
   text-align: left;
   padding: 0.2em 0.5em 0.2em 0.5em;
-  border-bottom: 1px solid;
 }
 
 .reveal table th[align="center"],
