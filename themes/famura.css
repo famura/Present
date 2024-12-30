@@ -411,7 +411,7 @@ section.has-light-background h6 {
 *********************************************/
 @media print {
   .backgrounds {
-    background-color: var(--dark-background-color);
+    background-color: var(--darkbackground-color);
   }
 }
 
@@ -463,6 +463,23 @@ section.has-light-background h6 {
 .reveal .slide-number-delimiter {
   margin: 0 1px;
 }
+
+/*********************************************
+ * Basic Highlighting
+ *********************************************/
+
+.highlight-red {
+    color: var(--bright-red);
+}
+
+.highlight-blue {
+    color: var(--bright-blue);
+}
+
+.highlight-purple {
+    color: var(--purple);
+}
+
 
 /*********************************************
  * Fragment

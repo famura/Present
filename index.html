@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- Set basic information -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<head>
-  <!-- Set basic information -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<!-- Presentation-specific information -->
+		<meta name="author" content="Dr. Fabio Muratore" />
+		<meta name="description" content="Presentation Template" />
+		<title></title>
 
-  <!-- Presentation-specific information -->
-  <meta name="author" content="Dr. Fabio Muratore" />
-  <meta name="description" content="Presentation Template" />
-  <title></title>
-
-  <!-- Load a specific math font for MathJax (load this before reveal) -->
-  <!-- <script type="text/x-mathjax-config">
+		<!-- Load a specific math font for MathJax (load this before reveal) -->
+		<!-- <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       "HTML-CSS" : {
         availableFonts : ["TeX"],
@@ -23,118 +22,245 @@
     });   
   </script> -->
 
-  <!-- Core CSS files -->
-  <link rel="stylesheet" href="third_party/reveal.js/dist/reset.css" />
-  <link rel="stylesheet" href="third_party/reveal.js/dist/reveal.css" />
+		<!-- Core CSS files -->
+		<link rel="stylesheet" href="third_party/reveal.js/dist/reset.css" />
+		<link rel="stylesheet" href="third_party/reveal.js/dist/reveal.css" />
 
-  <!-- Theme used for syntax highlighted code -->
-  <link rel="stylesheet" href="third_party/reveal.js/plugin/highlight/monokai.css" id="highlight-theme" />
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="third_party/reveal.js/plugin/highlight/monokai.css" id="highlight-theme" />
 
-  <!-- Diagrams plugin, usually located at reveal.js/plugin/ but here they have been moved to third_party/ -->
-  <link rel="stylesheet" href="third_party/diagram/revealjs-diagram.css" />
+		<!-- Diagrams plugin, usually located at reveal.js/plugin/ but here they have been moved to third_party/ -->
+		<link rel="stylesheet" href="third_party/diagram/revealjs-diagram.css" />
 
-  <!-- Custom theme -->
-  <link rel="stylesheet" href="themes/famura.css" id="theme" />
+		<!-- Custom theme -->
+		<link rel="stylesheet" href="themes/famura.css" id="theme" />
 
-  <!-- Tab icon -->
-  <link rel="icon" href="content/logos/mechanical_arm.png" />
-</head>
+		<!-- Tab icon -->
+		<link rel="icon" href="content/logos/mechanical_arm.png" />
+	</head>
 
-<!-- =============================================================================================================== -->
+	<!-- ============================================================================================================= -->
 
-<body>
-  <div class="reveal">
-    <div class="slides">
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- ======================================================================================================= -->
 
-      <!-- ========================================================================================================= -->
+				<section data-state="no-slide-footer">
+					<h1 class="title">Time Encoding: (New) Approaches to an Old Problem</h1>
+				</section>
 
-      <section data-state="no-slide-footer">
-        <h1 class="title">Title Text</h1>
-      </section>
+				<section>
+					<h2>What's the issue?</h2>
+					<p>Time is the most prominent feature</p>
+					<p>Everyone handles it differently</p>
+					<p>Especially in forecasting tasks, its values have not been seen yet</p>
+				</section>
 
+				<section>
+					<h2>What's the issue?</h2>
 
+					<table>
+						<thead>
+							<tr>
+								<th>Time</th>
+								<th>Feature 1</th>
+								<th>...</th>
+								<th>Feature N</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2023-10-01 12:00:00</td>
+								<td>0.5</td>
+								<td>...</td>
+								<td>-0.8</td>
+							</tr>
+							<tr>
+								<td>2023-10-01 12:00:01</td>
+								<td>-0.6</td>
+								<td>...</td>
+								<td>0.07</td>
+							</tr>
+							<tr>
+								<td>2023-10-01 12:00:02</td>
+								<td>240.4</td>
+								<td>...</td>
+								<td>-93.9</td>
+							</tr>
+							<tr>
+								<td class="highlight-red">2023-10-01 12:07:14</td>
+								<td>-0.3</td>
+								<td>...</td>
+								<td>/0.6</td>
+							</tr>
+							<tr>
+								<td>2023-10-01 12:07:15</td>
+								<td class="highlight-blue">0.00007</td>
+								<td>...</td>
+								<td class="highlight-blue">1823450</td>
+							</tr>
+							<tr>
+								<td>2023-10-01 12:07:16</td>
+								<td>-0.91238</td>
+								<td>...</td>
+								<td>0.42234</td>
+							</tr>
+							<tr>
+								<td class="highlight-red">2023-10-01 12:08:23</td>
+								<td class="highlight-blue">0.000019</td>
+								<td>...</td>
+								<td class="highlight-blue">-99862.3</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
 
-      <!-- ========================================================================================================= -->
+				<section>
+					<h2>Feature Creation</h2>
+				</section>
 
-    </div> <!-- slides -->
-  </div> <!-- reveal -->
+				<section>
+					<h2>What do we want?</h2>
+					<ol>
+						<li>Extraction of periodic and non-periodic patterns</li>
+						<li>
+							Invariance to (linear) time scaling <br />
+							<span class="highlight-purple"
+								>Think: measurements could be in seconds and/or milliseconds</span
+							>
+						</li>
+						<li>
+							Bounded feature values <br />
+							<span class="highlight-purple"
+								>Think: forecasting tasks, when datetimes have not been seen yet</span
+							>
+						</li>
+					</ol>
+				</section>
 
-  <!-- ============================================================================================================= -->
+				<section>
+					<h2>What do we have?</h2>
+					<p>"Revival" of the topic in the context of transformer models</p>
+					<p>A new paper every week</p>
+				</section>
 
-  <script src="third_party/reveal.js/dist/reveal.js"></script>
-  <script src="third_party/reveal.js/plugin/highlight/highlight.js"></script>
-  <script src="third_party/reveal.js/plugin/math/math.js"></script>
-  <script src="third_party/reveal.js/plugin/search/search.js"></script>
-  <script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
-  <!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
-  <!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
-  <script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
-      controls: true, // controls
-      progress: true, // progress bar
-      history: true, // push each slide change to the browser history, implies hash: true
-      // width: '60%',  // weird scaling of the textwidth
-      center: true, // center vertically
-      transition: "slide", // https://revealjs.com/transitions/
-      slideNumber: "h.v", // https://revealjs.com/slide-numbers/
-      viewDistance: 3,
-      math: {
-        mathjax: "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
-        // mathjax: 'third_party/reveal.js/plugin/math/MathJax/es5/tex-chtml-full.js',
-        config: "TeX-AMS_HTML-full", // https://docs.mathjax.org/en/v2.7-latest/config-files.html
-        // Pass other options into `MathJax.Hub.Config()`
-        TeX: {
-          extensions: ["HTML.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ], // inline symbols are not working for local mathjax
-          //packages: {"[+]": ["xcolor", "csquotes"]},
-          Macros: {
-            RR: "{\\bf R}",
-            diff: "\\mathrm{d}",
-            bluexi: "{\\color{var(--bright-blue)} \\xi}",
-            bluephi: "{\\color{var(--bright-blue)} \\phi}",
-          },
-        },
-        "HTML-CSS": {
-          // https://docs.mathjax.org/en/v2.7-latest/options/output-processors/HTML-CSS.html#configure-html-css
-          scale: 80, // adjusts the container of mathjax equations
-        },
-      },
-      plugins: [RevealZoom, RevealSearch, RevealMath, RevealHighlight], // https://revealjs.com/plugins/
+				<!-- ======================================================================================================= -->
 
-      dependencies: [
-        // { src: 'third_party/reveal.js/plugin/math/math.js', async: true }, // loads MathJax from the internet if not specified above (math: { ... mathjax: ... ) )
+				<section>
+					<h5>Time2Vec: Learning a Vector Representation of Time</h5>
+					<p>Goal: General plug-and-play feature</p>
+					<p>
+						Inspiration: Luke B Godfrey and Michael S Gashler. Neural decomposition of time-series data for
+						effective generalization. IEEE transactions on neural networks and learning systems,
+						29(7):2973–2985, 2018.
+					</p>
+					<p>Method: Decompose time signal with periodic functions</p>
+					$$ tau(t) = lbrace {omega_i} $$ tau = feature value with t = datetime
+				</section>
 
-        // Headers and footers
-        {
-          src: "third_party/header-footer/header-footer.js",
-          async: true,
-          callback: function () {
-            slide_header.initialize({
-              header: {
-                // logoRight: "./content/logos/XYZ.png",
-                // logoLeft: "./content/logos/XYZ.png",
-                background: "rgba(170, 34, 51, 0)", // = #a23
-              },
-              footer: {
-                background: "rgba(170, 34, 51, 0)", // = #a23
-                // logoRight: "./content/logos/XYZ.png",
-                // logoLeft: "./content/logos/XYZ.png",
-                text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2022-12-13",
-              },
-            })
-          },
-        },
-        { src: "third_party/reveald3/reveald3.js" },
-      ],
-    }) // end Reveal.initialize()
-  </script>
+				<section>
+					<h5>
+						Rethinking the Power of Timestamps for Robust Time Series Forecasting: A Global-Local Fusion
+						Perspective
+					</h5>
+				</section>
 
-</body>
+				<section>
+					<h5>Improving Position Encoding of Transformers for Multivariate Time Series Classification</h5>
+				</section>
 
+				<section>
+					<h5>
+						The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models Based
+						on Simple Features
+					</h5>
+				</section>
+
+				<section>
+					<h5>Fourier Features Let Networks LearnHigh Frequency Functions in Low Dimensional Domains</h5>
+				</section>
+
+				<!-- ======================================================================================================= -->
+			</div>
+			<!-- slides -->
+		</div>
+		<!-- reveal -->
+
+		<!-- =========================================================================================================== -->
+
+		<script src="third_party/reveal.js/dist/reveal.js"></script>
+		<script src="third_party/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="third_party/reveal.js/plugin/math/math.js"></script>
+		<script src="third_party/reveal.js/plugin/search/search.js"></script>
+		<script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
+		<!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
+		<!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				controls: true, // controls
+				progress: true, // progress bar
+				history: true, // push each slide change to the browser history, implies hash: true
+				// width: '60%',  // weird scaling of the textwidth
+				center: true, // center vertically
+				transition: "slide", // https://revealjs.com/transitions/
+				slideNumber: "h.v", // https://revealjs.com/slide-numbers/
+				viewDistance: 3,
+				math: {
+					mathjax: "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+					// mathjax: 'third_party/reveal.js/plugin/math/MathJax/es5/tex-chtml-full.js',
+					config: "TeX-AMS_HTML-full", // https://docs.mathjax.org/en/v2.7-latest/config-files.html
+					// Pass other options into `MathJax.Hub.Config()`
+					TeX: {
+						extensions: ["HTML.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
+						inlineMath: [
+							["$", "$"],
+							["\\(", "\\)"],
+						], // inline symbols are not working for local mathjax
+						//packages: {"[+]": ["xcolor", "csquotes"]},
+						Macros: {
+							RR: "{\\bf R}",
+							diff: "\\mathrm{d}",
+							bluexi: "{\\color{var(--bright-blue)} \\xi}",
+							bluephi: "{\\color{var(--bright-blue)} \\phi}",
+						},
+					},
+					"HTML-CSS": {
+						// https://docs.mathjax.org/en/v2.7-latest/options/output-processors/HTML-CSS.html#configure-html-css
+						scale: 80, // adjusts the container of mathjax equations
+					},
+				},
+				plugins: [RevealZoom, RevealSearch, RevealMath, RevealHighlight], // https://revealjs.com/plugins/
+
+				dependencies: [
+					// { src: 'third_party/reveal.js/plugin/math/math.js', async: true }, // loads MathJax from the internet if not specified above (math: { ... mathjax: ... ) )
+
+					// Headers and footers
+					{
+						src: "third_party/header-footer/header-footer.js",
+						async: true,
+						callback: function () {
+							slide_header.initialize({
+								header: {
+									// logoRight: "./content/logos/XYZ.png",
+									// logoLeft: "./content/logos/XYZ.png",
+									background: "rgba(170, 34, 51, 0)", // = #a23
+								},
+								footer: {
+									background: "rgba(170, 34, 51, 0)", // = #a23
+									// logoRight: "./content/logos/XYZ.png",
+									// logoLeft: "./content/logos/XYZ.png",
+									text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2022-12-13",
+								},
+							});
+						},
+					},
+					{ src: "third_party/reveald3/reveald3.js" },
+				],
+			}); // end Reveal.initialize()
+		</script>
+	</body>
 </html>
