@@ -467,6 +467,10 @@ section.has-light-background h6 {
  * Basic Highlighting
  *********************************************/
 
+.highlight-orange {
+    color: var(--title-color);
+}
+
 .highlight-red {
     color: var(--bright-red);
 }
@@ -478,7 +482,6 @@ section.has-light-background h6 {
 .highlight-purple {
     color: var(--purple);
 }
-
 
 /*********************************************
  * Fragment

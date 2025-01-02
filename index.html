@@ -33,7 +33,8 @@
 		<link rel="stylesheet" href="third_party/diagram/revealjs-diagram.css" />
 
 		<!-- Custom theme -->
-		<link rel="stylesheet" href="themes/famura.css" id="theme" />
+		<link rel="stylesheet" type="text/css" href="themes/famura.css" id="theme" />
+		<link rel="stylesheet" type="text/css" href="themes/shapes.css" />
 
 		<!-- Tab icon -->
 		<link rel="icon" href="content/logos/mechanical_arm.png" />
@@ -52,225 +53,69 @@
 
 				<section>
 					<h2>What's the issue?</h2>
-					<p>Time is the most prominent feature</p>
-					<p>Everyone handles it differently</p>
-					<p>Especially in forecasting tasks, its values have not been seen yet</p>
+					<p class="fragment">Time is the most prominent feature</p>
+					<p class="fragment">Everyone handles it differently</p>
+					<p class="fragment">Time stamps are typically assumed to be equidistant</p>
+					<p class="fragment">During forecasting, its values have not been seen yet</p>
 				</section>
 
 				<section>
 					<h2>What's the issue?</h2>
-					<div id="table-container" href="table.html"></div>
-				</section>
-
-				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-					<h2>Feature Creation</h2>
-					<p>Encode each time step (independently): $\RR^{T} \rightarrow \RR^{T \times d_{feat}}$ </br> e.g. day of month or absolute time since reference date</p>
-					<div
-						class="r-vstack"
-						style="
-							position: absolute;
-							left: 0;
-							display: flex;
-							flex-direction: column;
-							justify-content: flex-end;
-						"
-					>
-						<div style="display: flex; align-items: center">
-							<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
-							<span>&#8658;</span>
-							<div
-								data-id="box1"
-								style="background: red; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
-							></div>
-						</div>
-						<div style="display: flex; align-items: center">
-							<span style="width: 320px; display: inline-block">2023-10-01 12:07:15</span>
-							<span>&#8658;</span>
-							<div
-								data-id="box2"
-								style="background: yellow; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
-							></div>
-						</div>
-						<div style="display: flex; align-items: center">
-							<span style="width: 320px; display: inline-block">&vellip;</span>
-							<span>&#8658;</span>
-							<div
-								data-id="box3"
-								style="background: cyan; width: 50px; height: 50px; margin: 5px; border-radius: 5px"
-							></div>
-						</div>
-						<div style="display: flex; align-items: center">
-							<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
-							<span>&#8658;</span>
-							<div
-								data-id="box4"
-								style="
-									background: darkmagenta;
-									width: 50px;
-									height: 50px;
-									margin: 5px;
-									border-radius: 5px;
-								"
-							></div>
-						</div>
-					</div>
-				</section>
-				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-					<h2>Feature Creation</h2>
-					<p>Combining the encoded values: $\RR^{T \times d_{feat}} \rightarrow \RR^{T \times d_{model}}$  </br>e.g. linear layer</p>
-					<div class="r-stack justify-center">
-						<!-- <div
-							data-id="box6"
-							data-auto-animate-delay="0.6"
-							style="
-								background: radial-gradient(circle at top left, red, transparent) 0 0,
-									radial-gradient(circle at top right, blue, transparent) 100% 0,
-									radial-gradient(circle at bottom right, yellow, transparent) 100% 100%,
-									radial-gradient(circle at bottom left, green, transparent) 0 100%;
-								background-size: 50% 50%;
-								background-repeat: no-repeat;
-								width: 200px;
-								height: 200px;
-								border-radius: 10px;
-							"
-						></div> -->
-						<div style="position: relative; width: 200px; height: 200px; border-radius: 10px">
-							<div
-								data-id="box1"
-								style="
-									position: absolute;
-									top: 0;
-									left: 0;
-									background: radial-gradient(circle at top left, red, transparent);
-									width: 100px;
-									height: 100px;
-									border-top-left-radius: 10px;
-								"
-							></div>
-							<div
-								data-id="box2"
-								style="
-									position: absolute;
-									top: 0;
-									right: 0;
-									background: radial-gradient(circle at top right, yellow, transparent);
-									width: 100px;
-									height: 100px;
-									border-top-right-radius: 10px;
-								"
-							></div>
-							<div
-								data-id="box3"
-								style="
-									position: absolute;
-									bottom: 0;
-									left: 0;
-									background: radial-gradient(circle at bottom left, cyan, transparent);
-									width: 100px;
-									height: 100px;
-									border-bottom-left-radius: 10px;
-								"
-							></div>
-							<div
-								data-id="box4"
-								style="
-									position: absolute;
-									bottom: 0;
-									right: 0;
-									background: radial-gradient(circle at bottom right, darkmagenta, transparent);
-									width: 100px;
-									height: 100px;
-									border-bottom-right-radius: 10px;
-								"
-							></div>
-              <div
-								data-id="box5"
-								style="
-									position: absolute;
-									bottom: 0;
-									right: 0;
-									background: transparent;
-									width: 100px;
-									height: 100px;
-								"
-							></div>
-              <div
-								data-id="box6"
-								style="
-									position: absolute;
-									bottom: 0;
-									right: 0;
-									background: transparent;
-									width: 100px;
-									height: 100px;
-								"
-							></div>
-						</div>
-					</div>
-				</section>
-				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-					<h2>Feature Creation</h2>
-					<div class="r-vstack">
-						<div
-							data-id="box1"
-							style="
-								background: rgb(255, 115, 0);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
-						<div
-							data-id="box2"
-							style="
-								background: rgb(135, 218, 204);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
-						<div
-							data-id="box3"
-							style="
-								background: rgb(105, 18, 18);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
-						<div
-							data-id="box4"
-							style="
-								background: rgb(52, 36, 145);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
-						<div
-							data-id="box5"
-							style="
-								background: rgb(255, 159, 159);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
-						<div
-							data-id="box6"
-							style="
-								background: rgb(105, 156, 130);
-								width: 50px;
-								height: 50px;
-								margin: 5px;
-								border-radius: 5px;
-							"
-						></div>
+					<div style="width: 105%">
+						<table>
+							<thead>
+								<tr>
+									<th>Time Stamp</th>
+									<th>Time Feature 1</th>
+									<th>...</th>
+									<th>Time Feature N</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2023-10-01 12:00:00</td>
+									<td>0.5</td>
+									<td>...</td>
+									<td>-0.8</td>
+								</tr>
+								<tr>
+									<td>2023-10-01 12:00:01</td>
+									<td>-0.6</td>
+									<td>...</td>
+									<td>0.07</td>
+								</tr>
+								<tr>
+									<td>2023-10-01 12:00:02</td>
+									<td>240.4</td>
+									<td>...</td>
+									<td>-93.9</td>
+								</tr>
+								<tr>
+									<td class="highlight-red">2023-10-01 12:07:14</td>
+									<td>-0.3</td>
+									<td>...</td>
+									<td>-0.6</td>
+								</tr>
+								<tr>
+									<td>2023-10-01 12:07:15</td>
+									<td class="highlight-blue">0.00007</td>
+									<td>...</td>
+									<td class="highlight-blue">1823450</td>
+								</tr>
+								<tr>
+									<td>2023-10-01 12:07:16</td>
+									<td>-0.91238</td>
+									<td>...</td>
+									<td>0.42234</td>
+								</tr>
+								<tr>
+									<td class="highlight-red">2023-10-01 12:08:23</td>
+									<td class="highlight-blue">0.00019</td>
+									<td>...</td>
+									<td class="highlight-blue">-99862.3</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</section>
 
@@ -299,7 +144,243 @@
 					<p>A new paper every week</p>
 				</section>
 
+				<section>
+					<h2>For Simplicity</h2>
+					<p>We ignore batching, i.e., $d_{batch} \colon= 1$</p>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Creation</h2>
+					<p>
+						Encode each time step (independently): $\RR^{l_{seq}} \rightarrow \RR^{l_{seq} \times d_{feat}}$
+					</p>
+					<p>
+						e.g. <span class="highlight-orange">day of month</span> or
+						<span class="highlight-orange">absolute time since reference date</span>
+					</p>
+					<p>Can be parallelized during data loading or batching</p>
+					<div>
+						<div
+							class="r-vstack fragment"
+							style="display: flex; flex-direction: column; justify-content: flex-end"
+						>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" data-id="box_seq_0" style="background: #a1c9f4"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:07:15</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" data-id="box_seq_1" style="background: #ffb482"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">&vellip;</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" data-id="box_seq_2" style="background: #8de5a1"></div>
+								<div class="row-vector-box-invisible" data-id="box_seq_3"></div>
+								<div class="row-vector-box-invisible" data-id="box_seq_4"></div>
+								<div class="row-vector-box-invisible" data-id="box_seq_5"></div>
+								<div class="row-vector-box-invisible" data-id="box_seq_6"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Splitting the Sequence</h2>
+					<div class="r-vstack" style="display: flex; flex-direction: column; justify-content: flex-end">
+						<div class="row-vector-box" data-id="box_seq_0" style="background: #a1c9f4"></div>
+						<div class="row-vector-box" data-id="box_seq_1" style="background: #ffb482"></div>
+						<div class="row-vector-box" data-id="box_seq_2" style="background: #8de5a1"></div>
+						<div class="row-vector-box" data-id="box_seq_3" style="background: #ff9f9b"></div>
+						<div class="row-vector-box" data-id="box_seq_4" style="background: #d0bbff"></div>
+						<div class="row-vector-box" data-id="box_seq_5" style="background: #debb9b"></div>
+						<div class="row-vector-box" data-id="box_seq_6" style="background: #fab0e4"></div>
+						<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Splitting the Sequence</h2>
+					<div class="r-vstack" style="display: flex; flex-direction: column">
+						<div style="display: flex; align-items: center; width: 200px">
+							<div style="display: flex; flex-direction: column; align-items: center">
+								<div class="row-vector-box" data-id="box_seq_0" style="background: #a1c9f4"></div>
+								<div class="row-vector-box" data-id="box_seq_1" style="background: #ffb482"></div>
+								<div class="row-vector-box" data-id="box_seq_2" style="background: #8de5a1"></div>
+							</div>
+							<span style="margin-left: 10px">patch 1</span>
+						</div>
+
+						<div style="width: 220px; height: 2px; background-color: white; margin: 9px 0"></div>
+
+						<div style="display: flex; align-items: center; width: 200px">
+							<div style="display: flex; flex-direction: column; align-items: center">
+								<div class="row-vector-box" data-id="box_seq_3" style="background: #ff9f9b"></div>
+								<div class="row-vector-box" data-id="box_seq_4" style="background: #d0bbff"></div>
+								<div class="row-vector-box" data-id="box_seq_5" style="background: #debb9b"></div>
+							</div>
+							<span style="margin-left: 10px">patch &vellip;</span>
+						</div>
+
+						<div style="width: 220px; height: 2px; background-color: white; margin: 9px 0"></div>
+
+						<div style="display: flex; align-items: center; width: 200px">
+							<div style="display: flex; flex-direction: column; align-items: center">
+								<div class="row-vector-box" data-id="box_seq_6" style="background: #fab0e4"></div>
+								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
+							</div>
+							<span style="margin-left: 10px">patch $n_{patch}$</span>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Embedding</h2>
+					<p>Focusing on one patch $\in \RR^{l_{patch} \times d_{feat}}$</p>
+					<div>
+						<div class="r-vstack fragment">
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
+								<span>&#8658;</span>
+								<div data-id="box1" class="row-vector-box" style="background: #fde725ff"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:07:15</span>
+								<span>&#8658;</span>
+								<div data-id="box2" class="row-vector-box" style="background: #73d055ff"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">&vellip;</span>
+								<span>&#8658;</span>
+								<div data-id="box3" class="row-vector-box" style="background: #2d708eff"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
+								<span>&#8658;</span>
+								<div data-id="box4" class="row-vector-box" style="background: #482677ff"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Embedding</h2>
+					<p>Combining the encoded values: $\RR^{l_{patch} \times d_{feat}} \rightarrow \RR^{d_{feat}}$</p>
+					<div class="r-stack justify-center">
+						<div style="position: relative; width: 150px; height: 50px; border-radius: 5px">
+							<div
+								class="embedded-feature-part"
+								data-id="box1"
+								style="
+									position: absolute;
+									top: 0;
+									left: 0;
+									background: radial-gradient(circle at top left, #fde725ff, #fde72522);
+									border-top-left-radius: 5px;
+								"
+							></div>
+							<div
+								class="embedded-feature-part"
+								data-id="box2"
+								style="
+									position: absolute;
+									top: 0;
+									right: 0;
+									background: radial-gradient(circle at top right, #73d055ff, #73d05522);
+									border-top-right-radius: 5px;
+								"
+							></div>
+							<div
+								class="embedded-feature-part"
+								data-id="box3"
+								style="
+									position: absolute;
+									bottom: 0;
+									left: 0;
+									background: radial-gradient(circle at bottom left, #2d708eff, #2d708e22);
+									border-bottom-left-radius: 5px;
+								"
+							></div>
+							<div
+								class="embedded-feature-part"
+								data-id="box4"
+								style="
+									position: absolute;
+									bottom: 0;
+									right: 0;
+									background: radial-gradient(circle at bottom right, #482677ff, #48267722);
+									border-bottom-right-radius: 5px;
+								"
+							></div>
+							<div
+								class="embedded-feature-part"
+								data-id="box5"
+								style="position: absolute; bottom: 0; right: 0; background: transparent"
+							></div>
+							<div
+								class="embedded-feature-part"
+								data-id="box6"
+								style="position: absolute; bottom: 0; right: 0; background: transparent"
+							></div>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Embedding</h2>
+					<p>Transform to model's embedding dimension: $\RR^{d_{feat}} \rightarrow \RR^{d_{model}}$</p>
+					<div class="r-hstack">
+						<div
+							class="one-unit-box left-rounded"
+							data-id="box1"
+							style="background: linear-gradient(to right, #8de5a1, #fffea3)"
+						></div>
+						<div
+							class="one-unit-box"
+							data-id="box2"
+							style="background: linear-gradient(to right, #fffea3, #fab0e4)"
+						></div>
+						<div
+							class="one-unit-box"
+							data-id="box3"
+							style="background: linear-gradient(to right, #fab0e4, #a1c9f4)"
+						></div>
+						<div
+							class="one-unit-box"
+							data-id="box4"
+							style="background: linear-gradient(to right, #a1c9f4, #55a868)"
+						></div>
+						<div
+							class="one-unit-box"
+							data-id="box5"
+							style="background: linear-gradient(to right, #55a868, #ff9f9b)"
+						></div>
+						<div
+							class="one-unit-box right-rounded"
+							data-id="box6"
+							style="background: linear-gradient(to right, #ff9f9b, #ff9f9b)"
+						></div>
+					</div>
+					<p class="fragment">
+						Later downstream: $x_{model\_input} = x_{time\_encoding} + x_{other\_encodings}$
+					</p>
+				</section>
+
 				<!-- ======================================================================================================= -->
+
+				<section
+					data-background-color="var(--bright-background-color)"
+					data-footer-class="newchap"
+					class="newchap"
+				>
+					<h2>Recent Approaches</h2>
+				</section>
 
 				<section>
 					<h5>Time2Vec: Learning a Vector Representation of Time</h5>
@@ -351,24 +432,6 @@
 		<!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
 		<!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
 		<!-- <script src="third_party/reveald3/reveald3.js"></script> -->
-		<script>
-			// Custom script to load a table from an external file. Example:
-			//   <div id="table-container" data-filename="table.html"></div>
-			// Get the filename from the href attribute
-			const filename = document.getElementById("table-container").getAttribute("href");
-			/// Load the content of the file into the div
-			fetch(`content/tables/${filename}`)
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error("Network response was not ok");
-					}
-					return response.text();
-				})
-				.then((data) => {
-					document.getElementById("table-container").innerHTML = data;
-				})
-				.catch((error) => console.error("Error loading content:", error));
-		</script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
