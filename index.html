@@ -54,7 +54,8 @@
 				<section>
 					<h2>What's the issue?</h2>
 					<p class="fragment">Time is the most prominent feature</p>
-					<p class="fragment">Everyone handles it differently</p>
+					<p class="fragment">"Revival" of the topic in the context of transformer models</p>
+					<p class="fragment">Everyone handles the time channel differently</p>
 					<p class="fragment">Time stamps are typically assumed to be equidistant</p>
 					<p class="fragment">During forecasting, its values have not been seen yet</p>
 				</section>
@@ -122,31 +123,34 @@
 				<section>
 					<h2>What do we want?</h2>
 					<ol>
-						<li>Extraction of periodic and non-periodic patterns</li>
-						<li>
-							Invariance to (linear) time scaling <br />
-							<span class="highlight-purple"
-								>Think: measurements could be in seconds and/or milliseconds</span
-							>
+						<li class="fragment">
+							Extraction of <span class="highlight-orange">periodic</span> and
+							<span class="highlight-orange">non-periodic</span> patterns
 						</li>
-						<li>
-							Bounded feature values <br />
+						<li class="fragment">
+							<span class="highlight-orange">Invariance</span> to (linear) time scaling <br />
+							<span class="highlight-purple">measurements could be in seconds and/or milliseconds</span>
+						</li>
+						<li class="fragment">
+							<span class="highlight-orange">Bounded</span> feature values <br />
 							<span class="highlight-purple"
-								>Think: forecasting tasks, when datetimes have not been seen yet</span
+								>forecasting tasks, when datetimes have not been seen yet</span
 							>
 						</li>
 					</ol>
 				</section>
 
-				<section>
-					<h2>What do we have?</h2>
-					<p>"Revival" of the topic in the context of transformer models</p>
-					<p>A new paper every week</p>
+				<section
+					data-background-color="var(--bright-background-color)"
+					data-footer-class="newchap"
+					class="newchap"
+				>
+					<h2>How do we do this?</h2>
 				</section>
 
 				<section>
 					<h2>For Simplicity</h2>
-					<p>We ignore batching, i.e., $d_{batch} \colon= 1$</p>
+					<p>In this presentation, we ignore batching, i.e., $d_{batch} \colon= 1$</p>
 				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
@@ -242,9 +246,14 @@
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Embedding</h2>
-					<p>Focusing on one patch $\in \RR^{l_{patch} \times d_{feat}}$</p>
+					<p class="fragment fade-in-then-out" data-fragment-index="1">
+						The complete (padded) data is $\in \RR^{n_{patch} \times l_{patch} \times d_{feat}}$
+					</p>
+					<p class="fragment" data-fragment-index="1">
+						Focusing on one patch $\in \RR^{l_{patch} \times d_{feat}}$
+					</p>
 					<div>
-						<div class="r-vstack fragment">
+						<div class="r-vstack fragment" data-fragment-index="2">
 							<div style="display: flex; align-items: center">
 								<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
 								<span>&#8658;</span>
@@ -364,7 +373,7 @@
 						<div
 							class="one-unit-box right-rounded"
 							data-id="box6"
-							style="background: linear-gradient(to right, #ff9f9b, #ff9f9b)"
+							style="background: linear-gradient(to right, #ff9f9b, #724f77)"
 						></div>
 					</div>
 					<p class="fragment">
