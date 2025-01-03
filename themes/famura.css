@@ -323,6 +323,11 @@ section.has-light-background h6 {
   border-spacing: 0;
 }
 
+.reveal .numeric td {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
 .reveal table th {
   font-weight: bold;
 }

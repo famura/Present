@@ -129,11 +129,13 @@
 						</li>
 						<li class="fragment">
 							<span class="highlight-orange">Invariance</span> to (linear) time scaling <br />
-							<span class="highlight-purple">measurements could be in seconds and/or milliseconds</span>
+							<span class="highlight-purple" style="font-size: 80%"
+								>measurements could be in seconds and/or milliseconds</span
+							>
 						</li>
 						<li class="fragment">
 							<span class="highlight-orange">Bounded</span> feature values <br />
-							<span class="highlight-purple"
+							<span class="highlight-purple" style="font-size: 80%"
 								>forecasting tasks, when datetimes have not been seen yet</span
 							>
 						</li>
@@ -162,12 +164,161 @@
 						e.g. <span class="highlight-orange">day of month</span> or
 						<span class="highlight-orange">absolute time since reference date</span>
 					</p>
-					<p>Can be parallelized during data loading or batching</p>
+					<p class="fragment">Can be parallelized during data loading or batching</p>
 					<div>
 						<div
 							class="r-vstack fragment"
 							style="display: flex; flex-direction: column; justify-content: flex-end"
 						>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block" data-id="date_0"
+									>2023-10-01 12:07:14</span
+								>
+								<span>&#8658;</span>
+								<div class="row-vector-box" style="background: #a1c9f4"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:07:15</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" style="background: #ffb482"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">&vellip;</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" style="background: #8de5a1"></div>
+								<div class="row-vector-box-invisible"></div>
+								<div class="row-vector-box-invisible"></div>
+								<div class="row-vector-box-invisible"></div>
+								<div class="row-vector-box-invisible"></div>
+							</div>
+							<div style="display: flex; align-items: center">
+								<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
+								<span>&#8658;</span>
+								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Creation</h2>
+					<h4>Periodic Time Encoding 🧠🧠</h4>
+					<span style="width: 320px; display: inline-block" data-id="date_0">2023-10-01 12:07:14</span>
+					<table class="fragment numeric" style="font-size: 80%; margin-top: 15px">
+						<thead>
+							<tr>
+								<th>Heuristic</th>
+								<th>Function Value</th>
+								<th>Feature Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>microsecond in second</td>
+								<td>0</td>
+								<td style="color: #a1c9f4">-1.0</td>
+							</tr>
+							<tr>
+								<td>second in minute</td>
+								<td>14</td>
+								<td style="color: #a1c9f4">-0.5254</td>
+							</tr>
+							<tr>
+								<td>minute in hour</td>
+								<td>07</td>
+								<td style="color: #a1c9f4">-0.7627</td>
+							</tr>
+							<tr>
+								<td>hour in day</td>
+								<td>12</td>
+								<td style="color: #a1c9f4">0.0435</td>
+							</tr>
+							<tr>
+								<td>day in week</td>
+								<td>6</td>
+								<td style="color: #a1c9f4">1.0</td>
+							</tr>
+							<tr>
+								<td>day in month</td>
+								<td>1</td>
+								<td style="color: #a1c9f4">-1.0</td>
+							</tr>
+							<tr>
+								<td>day in year</td>
+								<td>274</td>
+								<td style="color: #a1c9f4">0.4959</td>
+							</tr>
+							<tr>
+								<td>month in year</td>
+								<td>10</td>
+								<td style="color: #a1c9f4">0.6667</td>
+							</tr>
+							<tr>
+								<td>year in century</td>
+								<td>23</td>
+								<td style="color: #a1c9f4">-0.5354</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Feature Creation</h2>
+					<h4>Absolute Time Encoding 🧠🖥️</h4>
+					<span>2023-10-01 12:07:14</span>
+          <div>
+            <p>Seconds since reference date $t_\Delta =$ 4.33858034 &times; 10<sup>8</sup></p>
+            <p>Encode $t_\Delta$ via $\sin$ and $\cos$ pairs</p>
+            $$\tau_i(t_\Delta) = \begin{cases} \sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
+            \cos(\omega_i t_\Delta) & \text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat}$$
+          </div>
+					<!-- Freqs -->
+					<!-- array([1.99238499e-07, 4.87773218e-07, 1.19416033e-06, 2.92352848e-06,
+       7.15734609e-06, 1.75225258e-05, 4.28984298e-05, 1.05023403e-04,
+       2.57116990e-04, 6.29470619e-04, 1.54106215e-03, 3.77280920e-03,
+       9.23654459e-03, 2.26127937e-02, 5.53603605e-02, 1.35532547e-01,
+       3.31809096e-01, 8.12330906e-01, 1.98873843e+00, 4.86880471e+00,
+       1.19197472e+01, 2.91817769e+01, 7.14424637e+01, 1.74904552e+02,
+       4.28199150e+02, 1.04831184e+03, 2.56646401e+03, 6.28318531e+03]) -->
+
+					<!-- Encodings -->
+					<!-- array([-0.99887562, -0.90763764,  0.26358323, -0.722294  ,  0.98157997,
+          -0.3575509 ,  0.85911758, -0.40116663,  0.56436871,  0.78695396,
+           0.83059594, -0.42567326,  0.51292395,  0.6767396 , -0.50614423,
+          -0.21890986,  0.08575028, -0.88195107, -0.92374056,  0.3148451 ,
+          -0.85166229, -0.89992607, -0.91532157,  0.96903721, -0.84527417,
+          -0.9999991 , -0.25495877,  0.00108478,  0.04740776, -0.41975458,
+          -0.96463666,  0.69158613,  0.19105171,  0.93389365,  0.51177826,
+           0.9160051 ,  0.82552284, -0.61701172, -0.55687556,  0.90487694,
+          -0.85843405,  0.73622246,  0.86244885, -0.97574509,  0.99631666,
+          -0.47134097, -0.38301877, -0.94914307, -0.52409097, -0.43604251,
+          -0.40272375, -0.24691472, -0.53433283,  0.00133855, -0.96695192]) -->
+
+					<p class="fragment"><span class="highlight-blue">Where do we get $\omega \in \RR^{d_{feat}}$ from?</span></p>
+				</section>
+        
+        <section>
+          <h2>Feature Creation</h2>
+					<h4>Absolute Time Encoding 🧠🖥️</h4>
+          <p>$\omega \in \RR^{d_{feat}}$ can be set via a <span class="highlight-blue">heuristic</span> or
+            <span class="highlight-red">learned</span></br>
+            <span class="highlight-purple" style="font-size: 80%;"> Learning requires significantly more memory (storing gradients)</span>
+          </p>
+          <div class="fragment">
+          <h5 style="margin-bottom: 0px;">Our Heuristic</h5>
+          <span class="highlight-purple" style="font-size: 80%; margin-bottom: 30px;"> Highly similar to the common one in positional encoding</span>
+        </div>
+          <ol>
+            <li class="fragment">Determine the <span class="highlight-blue">max and min wavelength</span> of the problem, e.g. 2 years and 1 ms</li>
+            <li class="fragment">Create a <span class="highlight-blue">log-spaced</span> tensor between min and max frequency in Hertz with $d_{feat}$ entries</li>
+          </ol>
+        </section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Feature Creation</h2>
+					<p>The result is a tensor $\tau \in \RR^{l_{seq} \times d_{feat}}$</p>
+					<div>
+						<div class="r-vstack" style="display: flex; flex-direction: column; justify-content: flex-end">
 							<div style="display: flex; align-items: center">
 								<span style="width: 320px; display: inline-block">2023-10-01 12:07:14</span>
 								<span>&#8658;</span>
@@ -209,6 +360,7 @@
 						<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
 					</div>
 				</section>
+
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Splitting the Sequence</h2>
 					<div class="r-vstack" style="display: flex; flex-direction: column">
@@ -232,9 +384,12 @@
 							<span style="margin-left: 10px">patch &vellip;</span>
 						</div>
 
-						<div style="width: 220px; height: 2px; background-color: white; margin: 9px 0"></div>
+						<div
+							style="width: 220px; height: 2px; background-color: white; margin: 9px 0"
+							data-id="last_sep"
+						></div>
 
-						<div style="display: flex; align-items: center; width: 200px">
+						<div style="display: flex; align-items: center; width: 200px" data-id="last_patch">
 							<div style="display: flex; flex-direction: column; align-items: center">
 								<div class="row-vector-box" data-id="box_seq_6" style="background: #fab0e4"></div>
 								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
@@ -245,12 +400,37 @@
 				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-					<h2>Feature Embedding</h2>
+					<h2>Padding the Sequence</h2>
+					<div class="r-vstack" style="display: flex; flex-direction: column">
+						<span>&vellip;</span>
+						<div
+							style="width: 220px; height: 2px; background-color: white; margin: 9px 0"
+							data-id="last_sep"
+						></div>
+
+						<div style="display: flex; align-items: center; width: 200px" data-id="last_patch">
+							<div style="display: flex; flex-direction: column; align-items: center">
+								<div class="row-vector-box" style="background: #fab0e4"></div>
+								<div class="row-vector-box" style="background: #fffea3"></div>
+								<div class="row-vector-box fragment fade-up" style="background: #8f8f8f">NaN</div>
+							</div>
+							<span style="margin-left: 10px">patch $n_{patch}$</span>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2 style="transition: opacity 0.8s ease 0.2s">Feature Embedding</h2>
+					<p class="fragment fade-out" data-fragment-index="2">
+						Done on model query during training and inference
+					</p>
 					<p class="fragment fade-in-then-out" data-fragment-index="1">
-						The complete (padded) data is $\in \RR^{n_{patch} \times l_{patch} \times d_{feat}}$
+						The <span class="highlight-orange">complete (padded) data</span> is $\in \RR^{n_{patch} \times
+						l_{patch} \times d_{feat}}$
 					</p>
 					<p class="fragment" data-fragment-index="1">
-						Focusing on one patch $\in \RR^{l_{patch} \times d_{feat}}$
+						Focusing on <span class="highlight-orange">one patch</span> $\in \RR^{l_{patch} \times
+						d_{feat}}$
 					</p>
 					<div>
 						<div class="r-vstack fragment" data-fragment-index="2">
