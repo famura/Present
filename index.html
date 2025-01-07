@@ -595,18 +595,18 @@
 					<h2>Recent Approaches</h2>
 				</section>
 
+				<!-- [v1] Thu, 11 Jul 2019  -->
 				<section class="paper-summary">
 					<h5>
 						Time2Vec: Learning a Vector Representation of Time
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
-					<p><span class="goal">Goal:</span> General model-agnostic plug-and-play feature</p>
+					<p><span class="goal">Goal:</span> general model-agnostic plug-and-play feature</p>
 					<p>
-						<span class="inspiration">Inspiration:</span>
-						<span class="papertitle"
-							>Neural decomposition of time-series data for effective generalization</span
-						>
-						<a href="https://arxiv.org/abs/1705.09137">📝</a>
+						<span class="inspiration">Inspiration:</span> prior work
+						<a href="https://arxiv.org/abs/1705.09137">📝</a> decomposed
+						<span class="highlight-blue">the values of</span> 1-dim time series into several sine functions
+						plus a linear function to extra- or interpolate the given signal
 					</p>
 				</section>
 				<section class="paper-summary">
@@ -614,7 +614,7 @@
 						Time2Vec: Learning a Vector Representation of Time
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
-					<p><span class="method">Method:</span> Decompose time signal with periodic functions</p>
+					<p><span class="method">Method:</span> decompose time signal with periodic functions</p>
 					\[ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
 					\text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
 					<div class="fragment">
@@ -626,33 +626,69 @@
 					</div>
 					<div class="fragment">
 						<p>
-							<span class="highlight-red">$\tau$ is fed as a separate input to the model</span></br> instead
+							$\tau$ is passed as a <span class="highlight-red">separate input to the model</span> </br>instead
 							of adding it to other embeddings
 						</p>
 						<p class="note-below">concatenation instead of aggregation increases input dimension</p>
 					</div>
 				</section>
 
-				<section>
+				<!-- [v1] Thu, 18 Jun 2020  -->
+				<section class="paper-summary">
+					<h5>
+						Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains
+						<a href="https://arxiv.org/abs/2006.10739">📝</a>
+					</h5>
+					<p><span class="goal">Goal:</span> solve several CV tasks with MLPs + Fourier features</p>
+					<p>
+						<span class="inspiration">Inspiration:</span> prior work
+						<a href="https://arxiv.org/abs/2003.08934">📝</a> &
+						<a href="https://arxiv.org/abs/1909.05215">📝</a> has experimentally found that a heuristic
+						sinusoidal mapping of input coordinates allows MLPs to represent higher frequency content
+					</p>
+				</section>
+				<section class="paper-summary">
+					<h5>
+						Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains
+						<a href="https://arxiv.org/abs/2006.10739">📝</a>
+					</h5>
+					<p>
+						<span class="method">Method:</span> special Fourier mapping that yields a stationary
+						(shift-invariant) neural tangent kernel with tuneable bandwidth kernel
+					</p>
+				</section>
+
+				<!-- [v1] Fri, 26 May 2023 -->
+				<section class="paper-summary">
+					<h5>
+						Improving Position Encoding of Transformers for Multivariate Time Series Classification
+						<a href="https://arxiv.org/abs/2305.16642">📝</a>
+					</h5>
+					<p><span class="goal">Goal:</span></p>
+					<p><span class="inspiration">Inspiration:</span></p>
+					<p><span class="method">Method:</span></p>
+				</section>
+
+				<!-- [v1] Fri, 27 Sep 2024 -->
+				<section class="paper-summary">
 					<h5>
 						Rethinking the Power of Timestamps for Robust Time Series Forecasting: A Global-Local Fusion
-						Perspective
+						Perspective <a href="https://arxiv.org/abs/2409.18696">📝</a>
 					</h5>
+					<p><span class="goal">Goal:</span></p>
+					<p><span class="inspiration">Inspiration:</span></p>
+					<p><span class="method">Method:</span></p>
 				</section>
 
-				<section>
-					<h5>Improving Position Encoding of Transformers for Multivariate Time Series Classification</h5>
-				</section>
-
-				<section>
+				<!-- [v1] Mon, 6 Jan 2025 -->
+				<section class="paper-summary">
 					<h5>
 						The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models Based
-						on Simple Features
+						on Simple Features <a href="https://arxiv.org/abs/2501.02945">📝</a>
 					</h5>
-				</section>
-
-				<section>
-					<h5>Fourier Features Let Networks LearnHigh Frequency Functions in Low Dimensional Domains</h5>
+					<p><span class="goal">Goal:</span></p>
+					<p><span class="inspiration">Inspiration:</span></p>
+					<p><span class="method">Method:</span></p>
 				</section>
 
 				<!-- ======================================================================================================= -->
