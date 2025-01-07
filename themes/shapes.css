@@ -29,6 +29,6 @@
 }
 
 .embedded-feature-part {
-    width: 80px; /* at bit larger than half of row-vector-box */
+    width: 65px; /* at bit larger than half of row-vector-box */
     height: 30px; /* at bit larger than half of row-vector-box */
 }

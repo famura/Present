@@ -158,16 +158,17 @@
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Creation</h2>
 					<p>
-						Encode each time step (independently): $\RR^{l_{seq}} \rightarrow \RR^{l_{seq} \times d_{feat}}$
+						Encode each time step independently: $\RR^{l_{seq}} \rightarrow \RR^{l_{seq} \times d_{feat}}$
 					</p>
 					<p>
 						e.g. <span class="highlight-orange">day of month</span> or
 						<span class="highlight-orange">absolute time since reference date</span>
 					</p>
-					<p class="fragment">Can be parallelized during data loading or batching</p>
+					<p class="fragment" data-fragment-index="0">Can be parallelized during data loading or batching</p>
 					<div>
 						<div
 							class="r-vstack fragment"
+							data-fragment-index="1"
 							style="display: flex; flex-direction: column; justify-content: flex-end"
 						>
 							<div style="display: flex; align-items: center">
@@ -186,15 +187,24 @@
 								<span style="width: 320px; display: inline-block">&vellip;</span>
 								<span>&#8658;</span>
 								<div class="row-vector-box" style="background: #8de5a1"></div>
-								<div class="row-vector-box-invisible"></div>
-								<div class="row-vector-box-invisible"></div>
-								<div class="row-vector-box-invisible"></div>
-								<div class="row-vector-box-invisible"></div>
 							</div>
 							<div style="display: flex; align-items: center">
 								<span style="width: 320px; display: inline-block">2023-10-01 12:08:23</span>
 								<span>&#8658;</span>
-								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3"></div>
+								<div class="row-vector-box" data-id="box_seq_7" style="background: #fffea3">
+									<span
+										class="fragment"
+										data-fragment-index="2"
+										style="position: relative; left: 100px; font-size: 80%"
+										>1</span
+									>
+									<span
+										class="fragment"
+										data-fragment-index="2"
+										style="position: relative; top: 40px; font-size: 80%"
+										>$d_{feat}$</span
+									>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -266,12 +276,13 @@
 					<h2>Feature Creation</h2>
 					<h4>Absolute Time Encoding 🧠🖥️</h4>
 					<span>2023-10-01 12:07:14</span>
-          <div>
-            <p>Seconds since reference date $t_\Delta =$ 4.33858034 &times; 10<sup>8</sup></p>
-            <p>Encode $t_\Delta$ via $\sin$ and $\cos$ pairs</p>
-            $$\tau_i(t_\Delta) = \begin{cases} \sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
-            \cos(\omega_i t_\Delta) & \text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat}$$
-          </div>
+					<p>Seconds since reference date $t_\Delta =$ 4.33858034 &times; 10<sup>8</sup></p>
+					<p class="note-below">1 year &#8776; 3.15576 10<sup>7</sup> seconds</p>
+					<div class="fragment">
+						<p>Encode $t_\Delta$ via $sin$ and $cos$ pairs</p>
+						\[ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
+						cos(\omega_i t_\Delta) & \text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+					</div>
 					<!-- Freqs -->
 					<!-- array([1.99238499e-07, 4.87773218e-07, 1.19416033e-06, 2.92352848e-06,
        7.15734609e-06, 1.75225258e-05, 4.28984298e-05, 1.05023403e-04,
@@ -294,25 +305,37 @@
           -0.47134097, -0.38301877, -0.94914307, -0.52409097, -0.43604251,
           -0.40272375, -0.24691472, -0.53433283,  0.00133855, -0.96695192]) -->
 
-					<p class="fragment"><span class="highlight-blue">Where do we get $\omega \in \RR^{d_{feat}}$ from?</span></p>
+					<p class="fragment">
+						<span class="highlight-orange">Where do we get $\omega \in \RR^{d_{feat}}$ from?</span>
+					</p>
 				</section>
-        
-        <section>
-          <h2>Feature Creation</h2>
+
+				<section>
+					<h2>Feature Creation</h2>
 					<h4>Absolute Time Encoding 🧠🖥️</h4>
-          <p>$\omega \in \RR^{d_{feat}}$ can be set via a <span class="highlight-blue">heuristic</span> or
-            <span class="highlight-red">learned</span></br>
-            <span class="highlight-purple" style="font-size: 80%;"> Learning requires significantly more memory (storing gradients)</span>
-          </p>
-          <div class="fragment">
-          <h5 style="margin-bottom: 0px;">Our Heuristic</h5>
-          <span class="highlight-purple" style="font-size: 80%; margin-bottom: 30px;"> Highly similar to the common one in positional encoding</span>
-        </div>
-          <ol>
-            <li class="fragment">Determine the <span class="highlight-blue">max and min wavelength</span> of the problem, e.g. 2 years and 1 ms</li>
-            <li class="fragment">Create a <span class="highlight-blue">log-spaced</span> tensor between min and max frequency in Hertz with $d_{feat}$ entries</li>
-          </ol>
-        </section>
+					<p>
+						$\omega \in \RR^{d_{feat}}$ can be set via a <span class="highlight-blue">heuristic</span> or be
+						<span class="highlight-red">learned</span>
+					</p>
+					<p class="note-below">Learning requires significantly more memory (storing gradients)</p>
+
+					<div class="fragment">
+						<h5 style="margin-bottom: 0px; margin-top: 20px">Our Heuristic</h5>
+						<p class="note-below" style="padding-top: 20px">
+							Highly similar to the common one in positional encoding
+						</p>
+					</div>
+					<ol>
+						<li class="fragment">
+							Determine the <span class="highlight-blue">max and min wavelength</span> of the problem,
+							e.g. 2 years and 1 ms
+						</li>
+						<li class="fragment">
+							Create a <span class="highlight-blue">log-spaced</span> tensor between min and max frequency
+							in Hertz with $d_{feat}$ entries
+						</li>
+					</ol>
+				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Creation</h2>
@@ -462,7 +485,7 @@
 					<h2>Feature Embedding</h2>
 					<p>Combining the encoded values: $\RR^{l_{patch} \times d_{feat}} \rightarrow \RR^{d_{feat}}$</p>
 					<div class="r-stack justify-center">
-						<div style="position: relative; width: 150px; height: 50px; border-radius: 5px">
+						<div style="position: relative; width: 120px; height: 50px; border-radius: 5px">
 							<div
 								class="embedded-feature-part"
 								data-id="box1"
@@ -519,6 +542,7 @@
 							></div>
 						</div>
 					</div>
+					<p class="fragment fade-up">In general: $d_{feat} \neq d_{model}$</p>
 				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
@@ -571,16 +595,42 @@
 					<h2>Recent Approaches</h2>
 				</section>
 
-				<section>
-					<h5>Time2Vec: Learning a Vector Representation of Time</h5>
-					<p>Goal: General plug-and-play feature</p>
+				<section class="paper-summary">
+					<h5>
+						Time2Vec: Learning a Vector Representation of Time
+						<a href="https://arxiv.org/abs/1907.05321">📝</a>
+					</h5>
+					<p><span class="goal">Goal:</span> General model-agnostic plug-and-play feature</p>
 					<p>
-						Inspiration: L. B. Godfrey and M. S. Gashler. Neural decomposition of time-series data for
-						effective generalization. IEEE transactions on neural networks and learning systems,
-						29(7):2973–2985, 2018.
+						<span class="inspiration">Inspiration:</span>
+						<span class="papertitle"
+							>Neural decomposition of time-series data for effective generalization</span
+						>
+						<a href="https://arxiv.org/abs/1705.09137">📝</a>
 					</p>
-					<p>Method: Decompose time signal with periodic functions</p>
-					$$ tau(t) = lbrace {omega_i} $$ tau = feature value with t = datetime
+				</section>
+				<section class="paper-summary">
+					<h5>
+						Time2Vec: Learning a Vector Representation of Time
+						<a href="https://arxiv.org/abs/1907.05321">📝</a>
+					</h5>
+					<p><span class="method">Method:</span> Decompose time signal with periodic functions</p>
+					\[ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
+					\text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+					<div class="fragment">
+						<p class="highlight-red">$\omega_i$ and $\phi_i$ are learnable</p>
+						<p>
+							<span class="highlight-red">$f$ is a periodic function</span>, $sin$ worked best,
+							benchmarked against $mod$, $triangle$, and non-periodic ones (very bad)
+						</p>
+					</div>
+					<div class="fragment">
+						<p>
+							<span class="highlight-red">$\tau$ is fed as a separate input to the model</span></br> instead
+							of adding it to other embeddings
+						</p>
+						<p class="note-below">concatenation instead of aggregation increases input dimension</p>
+					</div>
 				</section>
 
 				<section>

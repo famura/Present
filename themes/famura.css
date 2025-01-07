@@ -55,6 +55,17 @@
   --dark-grey: #2c3437;
   --dark-purple: #854aac;
   --dark-blue: #3333b3;
+  /* seaborn pastel palette, copied from https://seaborn.pydata.org/generated/seaborn.color_palette.html */
+  --sns-color-1: #a1c9f4;
+  --sns-color-2: #ffb482;
+  --sns-color-3: #8de5a1;
+  --sns-color-4: #ff9f9b;
+  --sns-color-5: #d0bbff;
+  --sns-color-6: #debb9b;
+  --sns-color-7: #fab0e4;
+  --sns-color-8: #cfcfcf;
+  --sns-color-9: #fffea3;
+  --sns-color-10: #b9f2f0;
 }
 
 .reveal-viewport {
@@ -585,6 +596,58 @@ section.has-light-background h6 {
 .reveal .authorname {
   color: var(--author-color);
 }
+
+.reveal .papertitle {
+  font-style: italic;
+}
+
+/*********************************************
+ * Note / Thought
+ *********************************************/
+ .reveal p.note-below {
+  color: var(--dark-purple);
+  font-size: 80%;
+  margin-top: 0px;
+  margin-bottom: -20px; /* compensate for the top: -20px */
+  position: relative;
+  top: -20px;  /* the margin of a p-element */
+ }
+
+ /*********************************************
+ * Summary Slide, Affecting Lists and More
+ *********************************************/
+ .paper-summary h1,
+ .paper-summary h2,
+ .paper-summary h3,
+ .paper-summary h4,
+ .paper-summary h5,
+ .paper-summary h6 {
+     font-style: italic; /* paper title in the header should be italic */
+ }
+
+ .reveal .paper-summary{
+    list-style-type: none; /* remove default list styling */
+}
+
+.reveal .paper-summary li {
+    margin-bottom: 10px; /* add some space between list items */
+}
+
+.reveal .paper-summary .goal {
+    font-weight: bold;
+    color: var(--sns-color-1)
+}
+
+.reveal .paper-summary .inspiration {
+    font-weight: bold;
+    color: var(--sns-color-7)
+}
+
+.reveal .paper-summary .method {
+    font-weight: bold;
+    color: var(--sns-color-3)
+}
+
 
 /*********************************************
  * Multiple Column Tables
