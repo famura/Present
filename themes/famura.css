@@ -616,15 +616,6 @@ section.has-light-background h6 {
  /*********************************************
  * Summary Slide, Affecting Lists and More
  *********************************************/
- .paper-summary h1,
- .paper-summary h2,
- .paper-summary h3,
- .paper-summary h4,
- .paper-summary h5,
- .paper-summary h6 {
-     font-style: italic; /* paper title in the header should be italic */
- }
-
  .reveal .paper-summary{
     list-style-type: none; /* remove default list styling */
 }

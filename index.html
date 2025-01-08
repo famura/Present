@@ -281,17 +281,16 @@
 					<div class="fragment">
 						<p>Encode $t_\Delta$ via $sin$ and $cos$ pairs</p>
 						\[ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
-						cos(\omega_i t_\Delta) & \text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+						cos(\omega_i t_\Delta) & \text{se} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
 					</div>
 					<!-- Freqs -->
 					<!-- array([1.99238499e-07, 4.87773218e-07, 1.19416033e-06, 2.92352848e-06,
-       7.15734609e-06, 1.75225258e-05, 4.28984298e-05, 1.05023403e-04,
-       2.57116990e-04, 6.29470619e-04, 1.54106215e-03, 3.77280920e-03,
-       9.23654459e-03, 2.26127937e-02, 5.53603605e-02, 1.35532547e-01,
-       3.31809096e-01, 8.12330906e-01, 1.98873843e+00, 4.86880471e+00,
-       1.19197472e+01, 2.91817769e+01, 7.14424637e+01, 1.74904552e+02,
-       4.28199150e+02, 1.04831184e+03, 2.56646401e+03, 6.28318531e+03]) -->
-
+          7.15734609e-06, 1.75225258e-05, 4.28984298e-05, 1.05023403e-04,
+          2.57116990e-04, 6.29470619e-04, 1.54106215e-03, 3.77280920e-03,
+          9.23654459e-03, 2.26127937e-02, 5.53603605e-02, 1.35532547e-01,
+          3.31809096e-01, 8.12330906e-01, 1.98873843e+00, 4.86880471e+00,
+          1.19197472e+01, 2.91817769e+01, 7.14424637e+01, 1.74904552e+02,
+          4.28199150e+02, 1.04831184e+03, 2.56646401e+03, 6.28318531e+03]) -->
 					<!-- Encodings -->
 					<!-- array([-0.99887562, -0.90763764,  0.26358323, -0.722294  ,  0.98157997,
           -0.3575509 ,  0.85911758, -0.40116663,  0.56436871,  0.78695396,
@@ -304,7 +303,6 @@
           -0.85843405,  0.73622246,  0.86244885, -0.97574509,  0.99631666,
           -0.47134097, -0.38301877, -0.94914307, -0.52409097, -0.43604251,
           -0.40272375, -0.24691472, -0.53433283,  0.00133855, -0.96695192]) -->
-
 					<p class="fragment">
 						<span class="highlight-orange">Where do we get $\omega \in \RR^{d_{feat}}$ from?</span>
 					</p>
@@ -435,7 +433,7 @@
 							<div style="display: flex; flex-direction: column; align-items: center">
 								<div class="row-vector-box" style="background: #fab0e4"></div>
 								<div class="row-vector-box" style="background: #fffea3"></div>
-								<div class="row-vector-box fragment fade-up" style="background: #8f8f8f">NaN</div>
+								<div class="row-vector-box fragment fade-up" style="background: #807f7f">NaN</div>
 							</div>
 							<span style="margin-left: 10px">patch $n_{patch}$</span>
 						</div>
@@ -481,9 +479,14 @@
 					</div>
 				</section>
 
-				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+				<section
+					data-auto-animate
+					data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
+					id="feature-embedding"
+				>
 					<h2>Feature Embedding</h2>
 					<p>Combining the encoded values: $\RR^{l_{patch} \times d_{feat}} \rightarrow \RR^{d_{feat}}$</p>
+					<p>In general $d_{feat} \neq d_{model}$</p>
 					<div class="r-stack justify-center">
 						<div style="position: relative; width: 120px; height: 50px; border-radius: 5px">
 							<div
@@ -542,7 +545,6 @@
 							></div>
 						</div>
 					</div>
-					<p class="fragment fade-up">In general: $d_{feat} \neq d_{model}$</p>
 				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
@@ -598,7 +600,7 @@
 				<!-- [v1] Thu, 11 Jul 2019  -->
 				<section class="paper-summary">
 					<h5>
-						Time2Vec: Learning a Vector Representation of Time
+						<span class="papertitle">Time2Vec: Learning a Vector Representation of Time</span>
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
 					<p><span class="goal">Goal:</span> general model-agnostic plug-and-play feature</p>
@@ -611,23 +613,23 @@
 				</section>
 				<section class="paper-summary">
 					<h5>
-						Time2Vec: Learning a Vector Representation of Time
+						<span class="papertitle">Time2Vec: Learning a Vector Representation of Time</span>
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
 					<p><span class="method">Method:</span> decompose time signal with periodic functions</p>
 					\[ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
-					\text{otherwise} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+					\text{otherwise} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} \]
 					<div class="fragment">
 						<p class="highlight-red">$\omega_i$ and $\phi_i$ are learnable</p>
 						<p>
-							<span class="highlight-red">$f$ is a periodic function</span>, $sin$ worked best,
+							<span class="highlight-blue">$f$ is a periodic function</span>, $sin$ worked best,
 							benchmarked against $mod$, $triangle$, and non-periodic ones (very bad)
 						</p>
 					</div>
 					<div class="fragment">
 						<p>
-							$\tau$ is passed as a <span class="highlight-red">separate input to the model</span> </br>instead
-							of adding it to other embeddings
+							$\tau$ is passed as a <span class="highlight-red">separate input to the model</span
+							><br />instead of adding it to other embeddings
 						</p>
 						<p class="note-below">concatenation instead of aggregation increases input dimension</p>
 					</div>
@@ -636,7 +638,10 @@
 				<!-- [v1] Thu, 18 Jun 2020  -->
 				<section class="paper-summary">
 					<h5>
-						Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains
+						<span class="papertitle"
+							>Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional
+							Domains</span
+						>
 						<a href="https://arxiv.org/abs/2006.10739">📝</a>
 					</h5>
 					<p><span class="goal">Goal:</span> solve several CV tasks with MLPs + Fourier features</p>
@@ -649,19 +654,55 @@
 				</section>
 				<section class="paper-summary">
 					<h5>
-						Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains
+						<span class="papertitle"
+							>Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional
+							Domains</span
+						>
 						<a href="https://arxiv.org/abs/2006.10739">📝</a>
 					</h5>
 					<p>
-						<span class="method">Method:</span> special Fourier mapping that yields a stationary
-						(shift-invariant) neural tangent kernel with tuneable bandwidth kernel
+						<span class="method">Method:</span> special Fourier mapping that yields a stationary neural
+						tangent kernel with tuneable bandwidth
 					</p>
+					<p>
+						\[
+						<!-- -->
+						\tau_i(t) = \begin{cases}
+						<!-- -->
+						a_i cos(\textcolor{gray}{2\pi} b_i^\trans t) & \text{if } i \text{ is odd} \\
+						<!-- -->
+						a_i sin(\textcolor{gray}{2\pi} b_i^\trans t)& \text{otherwise} \end{cases} ,
+						\quad\text{for}\quad i = 1, \dots, d_{feat} \\
+						<!-- -->
+						\text{with}\quad t \in \RR^{l_{patch}}, a_i \in \RR,\ b_i \in \RR^{l_{patch}}
+						<!-- -->
+						\]
+					</p>
+					<div class="fragment">
+						<p class="highlight-red">$a_i$ and $b_i$ are learnable</p>
+						<p class="note-below">but here it can be added to the other embeddings (unspecified)</p>
+					</div>
+					<div class="fragment">
+						<p>
+							$t \in \RR^{l_{patch}}$ requires a
+							<a href="#/feature-embedding"
+								><span class="highlight-red">different feature embedding</span></a
+							>,<br />resulting in
+							<span class="highlight-blue">patch-position-depended frequencies $b_{ij}$</span>
+						</p>
+						<p class="note-below" style="width: 105%">
+							same time point $t_j$ is encoded differently depending on its position in the patch
+						</p>
+					</div>
 				</section>
 
 				<!-- [v1] Fri, 26 May 2023 -->
 				<section class="paper-summary">
 					<h5>
-						Improving Position Encoding of Transformers for Multivariate Time Series Classification
+						<span class="papertitle"
+							>Improving Position Encoding of Transformers for Multivariate Time Series
+							Classification</span
+						>
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
 					<p><span class="goal">Goal:</span></p>
@@ -672,8 +713,11 @@
 				<!-- [v1] Fri, 27 Sep 2024 -->
 				<section class="paper-summary">
 					<h5>
-						Rethinking the Power of Timestamps for Robust Time Series Forecasting: A Global-Local Fusion
-						Perspective <a href="https://arxiv.org/abs/2409.18696">📝</a>
+						<span class="papertitle"
+							>Rethinking the Power of Timestamps for Robust Time Series Forecasting: A Global-Local
+							Fusion Perspective</span
+						>
+						<a href="https://arxiv.org/abs/2409.18696">📝</a>
 					</h5>
 					<p><span class="goal">Goal:</span></p>
 					<p><span class="inspiration">Inspiration:</span></p>
@@ -683,8 +727,11 @@
 				<!-- [v1] Mon, 6 Jan 2025 -->
 				<section class="paper-summary">
 					<h5>
-						The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models Based
-						on Simple Features <a href="https://arxiv.org/abs/2501.02945">📝</a>
+						<span class="papertitle"
+							>The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models
+							Based on Simple Features</span
+						>
+						<a href="https://arxiv.org/abs/2501.02945">📝</a>
 					</h5>
 					<p><span class="goal">Goal:</span></p>
 					<p><span class="inspiration">Inspiration:</span></p>
@@ -726,14 +773,15 @@
 					config: "TeX-AMS_HTML-full", // https://docs.mathjax.org/en/v2.7-latest/config-files.html
 					// Pass other options into `MathJax.Hub.Config()`
 					TeX: {
-						extensions: ["HTML.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
+						extensions: ["HTML.js", "color.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
 						inlineMath: [
 							["$", "$"],
 							["\\(", "\\)"],
 						], // inline symbols are not working for local mathjax
-						//packages: {"[+]": ["xcolor", "csquotes"]},
+						// packages: {"[+]": ["xcolor"]},
 						Macros: {
 							RR: "{\\bf R}",
+							trans: "{\\intercal}" /* alternatively \\top */,
 							diff: "\\mathrm{d}",
 							bluexi: "{\\color{var(--bright-blue)} \\xi}",
 							bluephi: "{\\color{var(--bright-blue)} \\phi}",
