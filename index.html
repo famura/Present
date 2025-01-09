@@ -280,8 +280,8 @@
 					<p class="note-below">1 year &#8776; 3.15576 10<sup>7</sup> seconds</p>
 					<div class="fragment">
 						<p>Encode $t_\Delta$ via $sin$ and $cos$ pairs</p>
-						\[ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
-						cos(\omega_i t_\Delta) & \text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+						$$ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ odd} \\
+						cos(\omega_i t_\Delta) & \text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} $$
 					</div>
 					<!-- Freqs -->
 					<!-- array([1.99238499e-07, 4.87773218e-07, 1.19416033e-06, 2.92352848e-06,
@@ -593,11 +593,11 @@
 						<p>
 							Vanilla (unscaled) attention mechanism
 							<!-- $$
-          \begin{aligned}
-          A &= X \Wq {\Wk}^\trans X^\trans \\
-          M &= softmax(A) X \Wv
-          \end{aligned}
-          $$ -->
+              \begin{aligned}
+              A &= X \Wq {\Wk}^\trans X^\trans \\
+              M &= softmax(A) X \Wv
+              \end{aligned}
+              $$ -->
 							$$ \begin{aligned} e_{ij} &= x_i \Wq (x_j {\Wk})^\trans \\ \alpha_{ij} &= exp(e_{ij}) /
 							\sum_k exp(e_{ik}) \\ y_i &= \sum_j \alpha_{ij} x_j \Wv \end{aligned} $$
 						</p>
@@ -605,11 +605,11 @@
 							<div>
 								<h5>absolute encoding</h5>
 								<!-- $$
-          \begin{aligned}
-          A &= (X + \redP) \Wq {\Wk}^\trans (X + \redP)^\trans  \\
-          M &= softmax(A) (X + \redP) \Wv
-          \end{aligned}
-          $$ -->
+                \begin{aligned}
+                A &= (X + \redP) \Wq {\Wk}^\trans (X + \redP)^\trans  \\
+                M &= softmax(A) (X + \redP) \Wv
+                \end{aligned}
+                $$ -->
 								$$ \begin{aligned} e_{ij} &= (x_i \redpluspi) \Wq ((x_j \redpluspj) {\Wk})^\trans \\ y_i
 								&= \sum_j \alpha_{ij} (x_j \redpluspj) \Wv \end{aligned} $$
 							</div>
@@ -652,8 +652,8 @@
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
 					<p><span class="method">Method:</span> decompose time signal with periodic functions</p>
-					\[ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
-					\text{else} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} \]
+					$$ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
+					\text{else} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} $$
 					<div class="fragment">
 						<p class="highlight-red">$\omega_i$ and $\phi_i$ are learnable</p>
 						<p>
@@ -700,18 +700,18 @@
 						tangent kernel with tuneable bandwidth
 					</p>
 					<p>
-						\[
+						$$
 						<!-- -->
 						\tau_i(t) = \begin{cases}
 						<!-- -->
-						a_i cos(\textcolor{grey}{2\pi} b_i^\trans t) & \text{if } i \text{ is odd} \\
+						a_i cos(\textcolor{grey}{2\pi} b_i^\trans t) & \text{if } i \text{ odd} \\
 						<!-- -->
 						a_i sin(\textcolor{grey}{2\pi} b_i^\trans t)& \text{else} \end{cases} , \quad\text{for}\quad i =
 						1, \dots, d_{feat} \\
 						<!-- -->
 						\text{with}\quad t \in \RR^{l_{patch}}, a_i \in \RR,\ b_i \in \RR^{l_{patch}}
 						<!-- -->
-						\]
+						$$
 					</p>
 					<div class="fragment">
 						<p class="highlight-red">$a_i$ and $b_i$ are learnable</p>
@@ -742,7 +742,8 @@
 					</h5>
 					<p>
 						<span class="goal">Goal:</span> improve absolute and relative encoding, not interested in time
-						as a feature pre se
+						as a feature pre se. For the absolute encoding, the focus is on making the auto-correlation of
+						positions more monotonous ("distance awareness")
 					</p>
 					<p>
 						<span class="inspiration">Inspiration:</span> original position encoding
@@ -758,11 +759,32 @@
 						>
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
-					<p><span class="method">Method:</span>augment original absolute encoding to</p>
+					<p><span class="method">Method (Part 1/2):</span> augment original absolute encoding</p>
 					<p>
-						\[ \tau_i(t) = \begin{cases} sin(\omega_i t) & \text{if } i \text{ is odd} \\ cos(\omega_i t) &
-						\text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+						$$ \tau_i(t) = \begin{cases}
+						<!--  -->
+						sin(\omega_i t) & \text{if } i \text{ even} \\ cos(\omega_i t) & \text{else} \end{cases} ,
+						<!--  -->
+						\quad \text{for}\quad i = 1, \dots, d_{model} \\
+						<!-- -->
+						\text{with}\quad \omega_i = L^{-\frac{i}{d_{model}}},\quad d_{model} = d_{feat} $$
 					</p>
+					<p class="note-below">$t$ is a position here, i.e., a non-negative integer</p>
+					<p class="fragment">
+						by setting
+						<span class="highlight-red">$\omega_i^{new} = \omega_i \frac{d_{model}}{l_{patch}}$</span>
+					</p>
+				</section>
+				<section class="paper-summary">
+					<h5>
+						<span class="papertitle"
+							>Improving Position Encoding of Transformers for Multivariate Time Series
+							Classification</span
+						>
+						<a href="https://arxiv.org/abs/2305.16642">📝</a>
+					</h5>
+					<p><span class="method">Method (Part 2/2):</span> GPU-efficient relative encoding</p>
+					<p></p>
 				</section>
 
 				<!-- [v1] Fri, 27 Sep 2024 -->
