@@ -32,3 +32,8 @@
     width: 65px; /* at bit larger than half of row-vector-box */
     height: 30px; /* at bit larger than half of row-vector-box */
 }
+
+.highlight-box {
+    display: table-row; /* ensure the div does not take full width */
+    border: 1px solid var(--bright-orange); /* thin border */
+}

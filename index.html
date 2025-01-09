@@ -223,7 +223,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr class="highlight-box">
 								<td>microsecond in second</td>
 								<td>0</td>
 								<td style="color: #a1c9f4">-1.0</td>
@@ -243,7 +243,7 @@
 								<td>12</td>
 								<td style="color: #a1c9f4">0.0435</td>
 							</tr>
-							<tr>
+							<tr class="highlight-box">
 								<td>day in week</td>
 								<td>6</td>
 								<td style="color: #a1c9f4">1.0</td>
@@ -263,7 +263,7 @@
 								<td>10</td>
 								<td style="color: #a1c9f4">0.6667</td>
 							</tr>
-							<tr>
+							<tr class="highlight-box">
 								<td>year in century</td>
 								<td>23</td>
 								<td style="color: #a1c9f4">-0.5354</td>
@@ -281,7 +281,7 @@
 					<div class="fragment">
 						<p>Encode $t_\Delta$ via $sin$ and $cos$ pairs</p>
 						\[ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ is odd} \\
-						cos(\omega_i t_\Delta) & \text{se} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+						cos(\omega_i t_\Delta) & \text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
 					</div>
 					<!-- Freqs -->
 					<!-- array([1.99238499e-07, 4.87773218e-07, 1.19416033e-06, 2.92352848e-06,
@@ -547,44 +547,79 @@
 					</div>
 				</section>
 
-				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
-					<h2>Feature Embedding</h2>
-					<p>Transform to model's embedding dimension: $\RR^{d_{feat}} \rightarrow \RR^{d_{model}}$</p>
-					<div class="r-hstack">
-						<div
-							class="one-unit-box left-rounded"
-							data-id="box1"
-							style="background: linear-gradient(to right, #8de5a1, #fffea3)"
-						></div>
-						<div
-							class="one-unit-box"
-							data-id="box2"
-							style="background: linear-gradient(to right, #fffea3, #fab0e4)"
-						></div>
-						<div
-							class="one-unit-box"
-							data-id="box3"
-							style="background: linear-gradient(to right, #fab0e4, #a1c9f4)"
-						></div>
-						<div
-							class="one-unit-box"
-							data-id="box4"
-							style="background: linear-gradient(to right, #a1c9f4, #55a868)"
-						></div>
-						<div
-							class="one-unit-box"
-							data-id="box5"
-							style="background: linear-gradient(to right, #55a868, #ff9f9b)"
-						></div>
-						<div
-							class="one-unit-box right-rounded"
-							data-id="box6"
-							style="background: linear-gradient(to right, #ff9f9b, #724f77)"
-						></div>
-					</div>
-					<p class="fragment">
-						Later downstream: $x_{model\_input} = x_{time\_encoding} + x_{other\_encodings}$
-					</p>
+				<section>
+					<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+						<h2>Feature Embedding</h2>
+						<p>Transform to model's embedding dimension: $\RR^{d_{feat}} \rightarrow \RR^{d_{model}}$</p>
+						<div class="r-hstack">
+							<div
+								class="one-unit-box left-rounded"
+								data-id="box1"
+								style="background: linear-gradient(to right, #8de5a1, #fffea3)"
+							></div>
+							<div
+								class="one-unit-box"
+								data-id="box2"
+								style="background: linear-gradient(to right, #fffea3, #fab0e4)"
+							></div>
+							<div
+								class="one-unit-box"
+								data-id="box3"
+								style="background: linear-gradient(to right, #fab0e4, #a1c9f4)"
+							></div>
+							<div
+								class="one-unit-box"
+								data-id="box4"
+								style="background: linear-gradient(to right, #a1c9f4, #55a868)"
+							></div>
+							<div
+								class="one-unit-box"
+								data-id="box5"
+								style="background: linear-gradient(to right, #55a868, #ff9f9b)"
+							></div>
+							<div
+								class="one-unit-box right-rounded"
+								data-id="box6"
+								style="background: linear-gradient(to right, #ff9f9b, #724f77)"
+							></div>
+						</div>
+						<div class="fragment">
+							<p>Later downstream: $x_{model\_inp} = x_{time\_emb} + x_{other\_emb}$</p>
+							<p class="highlight-orange">Analogous to absolute position encoding for LLMs</p>
+						</div>
+					</section>
+					<section>
+						<h3>Absolute vs. Relative Position Encoding</h3>
+						<p>
+							Vanilla (unscaled) attention mechanism
+							<!-- $$
+          \begin{aligned}
+          A &= X \Wq {\Wk}^\trans X^\trans \\
+          M &= softmax(A) X \Wv
+          \end{aligned}
+          $$ -->
+							$$ \begin{aligned} e_{ij} &= x_i \Wq (x_j {\Wk})^\trans \\ \alpha_{ij} &= exp(e_{ij}) /
+							\sum_k exp(e_{ik}) \\ y_i &= \sum_j \alpha_{ij} x_j \Wv \end{aligned} $$
+						</p>
+						<div class="flex-container-row" style="width: 110%; position: relative">
+							<div>
+								<h5>absolute encoding</h5>
+								<!-- $$
+          \begin{aligned}
+          A &= (X + \redP) \Wq {\Wk}^\trans (X + \redP)^\trans  \\
+          M &= softmax(A) (X + \redP) \Wv
+          \end{aligned}
+          $$ -->
+								$$ \begin{aligned} e_{ij} &= (x_i \redpluspi) \Wq ((x_j \redpluspj) {\Wk})^\trans \\ y_i
+								&= \sum_j \alpha_{ij} (x_j \redpluspj) \Wv \end{aligned} $$
+							</div>
+							<div>
+								<h5>relative encoding</h5>
+								$$ \begin{aligned} e_{ij} &= (x_i \Wq \greypluspijq) (x_j {\Wk} \redpluspijk)^\trans \\
+								y_i &= \sum_j \alpha_{ij} (x_j \Wv \redpluspijv) \end{aligned} $$
+							</div>
+						</div>
+					</section>
 				</section>
 
 				<!-- ======================================================================================================= -->
@@ -594,7 +629,7 @@
 					data-footer-class="newchap"
 					class="newchap"
 				>
-					<h2>Recent Approaches</h2>
+					<h2>Recent Related Work</h2>
 				</section>
 
 				<!-- [v1] Thu, 11 Jul 2019  -->
@@ -618,7 +653,7 @@
 					</h5>
 					<p><span class="method">Method:</span> decompose time signal with periodic functions</p>
 					\[ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
-					\text{otherwise} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} \]
+					\text{else} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} \]
 					<div class="fragment">
 						<p class="highlight-red">$\omega_i$ and $\phi_i$ are learnable</p>
 						<p>
@@ -669,10 +704,10 @@
 						<!-- -->
 						\tau_i(t) = \begin{cases}
 						<!-- -->
-						a_i cos(\textcolor{gray}{2\pi} b_i^\trans t) & \text{if } i \text{ is odd} \\
+						a_i cos(\textcolor{grey}{2\pi} b_i^\trans t) & \text{if } i \text{ is odd} \\
 						<!-- -->
-						a_i sin(\textcolor{gray}{2\pi} b_i^\trans t)& \text{otherwise} \end{cases} ,
-						\quad\text{for}\quad i = 1, \dots, d_{feat} \\
+						a_i sin(\textcolor{grey}{2\pi} b_i^\trans t)& \text{else} \end{cases} , \quad\text{for}\quad i =
+						1, \dots, d_{feat} \\
 						<!-- -->
 						\text{with}\quad t \in \RR^{l_{patch}}, a_i \in \RR,\ b_i \in \RR^{l_{patch}}
 						<!-- -->
@@ -705,9 +740,29 @@
 						>
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
-					<p><span class="goal">Goal:</span></p>
-					<p><span class="inspiration">Inspiration:</span></p>
-					<p><span class="method">Method:</span></p>
+					<p>
+						<span class="goal">Goal:</span> improve absolute and relative encoding, not interested in time
+						as a feature pre se
+					</p>
+					<p>
+						<span class="inspiration">Inspiration:</span> original position encoding
+						<a href="https://arxiv.org/abs/1706.03762">📝</a> (absolute encoding only) and a survey
+						<a href="https://arxiv.org/abs/2102.11090">📝</a>
+					</p>
+				</section>
+				<section class="paper-summary">
+					<h5>
+						<span class="papertitle"
+							>Improving Position Encoding of Transformers for Multivariate Time Series
+							Classification</span
+						>
+						<a href="https://arxiv.org/abs/2305.16642">📝</a>
+					</h5>
+					<p><span class="method">Method:</span>augment original absolute encoding to</p>
+					<p>
+						\[ \tau_i(t) = \begin{cases} sin(\omega_i t) & \text{if } i \text{ is odd} \\ cos(\omega_i t) &
+						\text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} \]
+					</p>
 				</section>
 
 				<!-- [v1] Fri, 27 Sep 2024 -->
@@ -781,10 +836,21 @@
 						// packages: {"[+]": ["xcolor"]},
 						Macros: {
 							RR: "{\\bf R}",
-							trans: "{\\intercal}" /* alternatively \\top */,
+							trans: "{\\textsf{T}}" /* alternatively \\top or \\intercal */,
 							diff: "\\mathrm{d}",
 							bluexi: "{\\color{var(--bright-blue)} \\xi}",
 							bluephi: "{\\color{var(--bright-blue)} \\phi}",
+							Wq: "W^{(q)}",
+							Wk: "W^{(k)}",
+							Wv: "W^{(v)}",
+							pk: "p^{(k)}",
+							pv: "p^{(v)}",
+							redP: "{\\color{var(--bright-red)} P}" /* or\ textcolor{var(--bright-red)}{P} */,
+							redpluspi: "{\\color{var(--bright-red)} + p_{i}}",
+							redpluspj: "{\\color{var(--bright-red)} + p_{j}}",
+							redpluspijk: "{\\color{var(--bright-red)} + p_{ij}^{(k)}}",
+							redpluspijv: "{\\color{var(--bright-red)} + p_{ij}^{(v)}}",
+							greypluspijq: "{\\color{var(--bright-grey)} + p_{ij}^{(v)}}",
 						},
 					},
 					"HTML-CSS": {
@@ -824,7 +890,7 @@
 									background: "rgba(170, 34, 51, 0)", // = #a23
 									// logoRight: "./content/logos/XYZ.png",
 									// logoLeft: "./content/logos/XYZ.png",
-									text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-31",
+									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-31",
 								},
 							});
 						},
