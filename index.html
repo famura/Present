@@ -211,7 +211,7 @@
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Creation</h2>
-					<h4>Periodic Time Encoding 🧠🧠</h4>
+					<h4>Periodic Time Encoding 🧠</h4>
 					<span style="width: 320px; display: inline-block" data-id="date_0">2023-10-01 12:07:14</span>
 					<table class="fragment numeric" style="font-size: 80%; margin-top: 15px">
 						<thead>
@@ -324,7 +324,7 @@
 					</div>
 					<ol>
 						<li class="fragment">
-							Determine the <span class="highlight-blue">max and min wavelength</span> of the problem,
+							Determine the <span class="highlight-blue">max and min wavelength</span> of the problem,<br />
 							e.g. 2 years and 1 ms
 						</li>
 						<li class="fragment">
@@ -334,9 +334,77 @@
 					</ol>
 				</section>
 
+				<section>
+					<h2>Feature Creation</h2>
+					<h4>Scale-wise Absolute Time Encoding 🧠</h4>
+					<span>2023-10-01 12:07:14</span>
+					<p>
+						<span class="highlight-blue" style="font-weight: bold">Hypothesis:</span> Some time scales are
+						more important
+					</p>
+					<p class="fragment">
+						Importance is expressed by the number of feature dimensions, i.e.,
+						<span class="highlight-orange">number of frequencies</span>, per scale
+					</p>
+					<div class="bar-container fragment fade-left">
+						<div class="bar-pair">
+							<div class="bar" style="height: 190px"></div>
+							<div class="small-bar"></div>
+							<span>ms&ndash;s</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 90px"></div>
+							<div class="small-bar"></div>
+							<span>s&ndash;m</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 50px"></div>
+							<div class="small-bar"></div>
+							<span>m&ndash;h</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 25px"></div>
+							<div class="small-bar"></div>
+							<span>h&ndash;d</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 15px"></div>
+							<div class="small-bar"></div>
+							<span>d&ndash;w</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 8px"></div>
+							<div class="small-bar"></div>
+							<span>w&ndash;m</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 5px"></div>
+							<div class="small-bar"></div>
+							<span>m&ndash;y</span>
+						</div>
+						<div class="bar-pair">
+							<div class="bar" style="height: 3px"></div>
+							<div class="small-bar"></div>
+							<span>y&ndash;c</span>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Feature Creation</h2>
+					<h4>Scale-wise Absolute Time Encoding 🧠</h4>
+					<p>Again, encode $t_\Delta$ via $sin$ and $cos$ pairs</p>
+					$$ \tau_i(t_\Delta) = \begin{cases} sin(\omega_i t_\Delta) & \text{if } i \text{ odd} \\
+					cos(\omega_i t_\Delta) & \text{else} \end{cases} , \text{ for } i = 1, \dots, d_{feat} $$
+					<p>
+						But $\omega$ is constructed differently: <br />
+						<span class="highlight-red">the frequencies are spaced linearly within a scale</span>
+					</p>
+				</section>
+
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Feature Creation</h2>
-					<p>The result is a tensor $\tau \in \RR^{l_{seq} \times d_{feat}}$</p>
+					<p>Anyhow, the result is a tensor $\tau \in \RR^{l_{seq} \times d_{feat}}$</p>
 					<div>
 						<div class="r-vstack" style="display: flex; flex-direction: column; justify-content: flex-end">
 							<div style="display: flex; align-items: center">
@@ -752,8 +820,8 @@
 						monotonous ("distance awareness")
 					</p>
 					<p>
-						<span class="inspiration">Inspiration:</span> original position encoding
-						<a href="https://arxiv.org/abs/1706.03762">📝</a> (absolute encoding only) and a survey
+						<span class="inspiration">Inspiration:</span> The original position encoding
+						<a href="https://arxiv.org/abs/1706.03762">📝</a> (absolute encoding only) as well as a survey
 						<a href="https://arxiv.org/abs/2102.11090">📝</a>
 					</p>
 				</section>
@@ -765,7 +833,7 @@
 						>
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
-					<p><span class="method">Method (Part 1/2):</span> augment original absolute encoding</p>
+					<p><span class="method">Method (Part 1/2):</span> Augment original absolute encoding</p>
 					<p>
 						$$ \tau_i(t) = \begin{cases}
 						<!--  -->
@@ -796,16 +864,19 @@
 					</p>
 					<p class="note-below">These weights are independent of the input</p>
 					<p></p>
-					<p class="fragment">
-						<span class="claim">Hypothesis:</span> Time series tasks do not profit from an <br />
-						(input-independent) relative encoding
-					</p>
-					<p class="note-below">
-						Step sizes $\Delta t$ may vary. Time stamp already encode relative information
-					</p>
+					<div class="fragment">
+						<p>
+							<span class="claim">Hypothesis:</span> Time series tasks do not profit from an <br />
+							(input-independent) relative encoding
+						</p>
+						<p class="note-below">
+							Step sizes $\Delta t$ may vary. Time stamp already encode relative information
+						</p>
+					</div>
 				</section>
 
 				<!-- [v1] Fri, 27 Sep 2024 -->
+				<!-- 
 				<section class="paper-summary">
 					<h5>
 						<span class="papertitle"
@@ -818,19 +889,50 @@
 					<p><span class="inspiration">Inspiration:</span></p>
 					<p><span class="method">Method:</span></p>
 				</section>
+        -->
 
 				<!-- [v1] Mon, 6 Jan 2025 -->
 				<section class="paper-summary">
-					<h5>
+					<h5 style="width: 106%">
 						<span class="papertitle"
 							>The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models
 							Based on Simple Features</span
 						>
 						<a href="https://arxiv.org/abs/2501.02945">📝</a>
 					</h5>
-					<p><span class="goal">Goal:</span></p>
-					<p><span class="inspiration">Inspiration:</span></p>
-					<p><span class="method">Method:</span></p>
+					<p>
+						<span class="goal">Goal:</span> Time series forecasting with minimal feature-engineering on top
+						of existing foundation model
+					</p>
+					<p>
+						<span class="inspiration">Inspiration:</span> Solving tabular data is already half of the battle
+					</p>
+				</section>
+				<section class="paper-summary">
+					<h5 style="width: 106%">
+						<span class="papertitle"
+							>The Tabular Foundation Model TabPFN Outperforms Specialized Time Series Forecasting Models
+							Based on Simple Features</span
+						>
+						<a href="https://arxiv.org/abs/2501.02945">📝</a>
+					</h5>
+					<p>
+						<span class="method">Method:</span> Their multi-step prediction setup requires them to exclude
+						lagged and auto-regressive features. Thus, all features are per time stamp.
+					</p>
+					<div class="fragment">
+						<p>
+							Extract 6 calendar features and encode them via
+							<span class="highlight-blue">$sin$ and $cos$</span>: hour of day, day of week, day of month,
+							day of year, week of year, month of year. Plus,
+							<span class="highlight-orange">the year itself</span>.
+						</p>
+						<p class="note-below">Quite few features, no seconds or lower</p>
+					</div>
+					<div class="fragment">
+						<p>Add the running index of each time step as a feature.</p>
+						<p class="note-below">Positional encoding, but without the sin-cos embedding</p>
+					</div>
 				</section>
 
 				<!-- ======================================================================================================= -->
@@ -930,7 +1032,7 @@
 									background: "rgba(170, 34, 51, 0)", // = #a23
 									// logoRight: "./content/logos/XYZ.png",
 									// logoLeft: "./content/logos/XYZ.png",
-									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-31",
+									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-14",
 								},
 							});
 						},

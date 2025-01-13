@@ -37,3 +37,27 @@
     display: table-row; /* ensure the div does not take full width */
     border: 1px solid var(--bright-orange); /* thin border */
 }
+
+.bar-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    justify-content: center; 
+}
+
+.bar-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bar {
+    width: 30px;
+    background-color: #fff;
+}
+
+.small-bar {
+    width: 30px;
+    height: 3px;
+    background-color: #9b6dbd;
+}
