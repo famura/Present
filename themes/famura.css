@@ -639,6 +639,11 @@ section.has-light-background h6 {
     color: var(--sns-color-3)
 }
 
+.reveal .paper-summary .claim {
+    font-weight: bold;
+    color: var(--sns-color-9)
+}
+
 
 /*********************************************
  * Multiple Column Tables

@@ -54,7 +54,6 @@
 				<section>
 					<h2>What's the issue?</h2>
 					<p class="fragment">Time is the most prominent feature</p>
-					<p class="fragment">"Revival" of the topic in the context of transformer models</p>
 					<p class="fragment">Everyone handles the time channel differently</p>
 					<p class="fragment">Time stamps are typically assumed to be equidistant</p>
 					<p class="fragment">During forecasting, its values have not been seen yet</p>
@@ -223,7 +222,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="highlight-box">
+							<tr>
 								<td>microsecond in second</td>
 								<td>0</td>
 								<td style="color: #a1c9f4">-1.0</td>
@@ -258,7 +257,7 @@
 								<td>274</td>
 								<td style="color: #a1c9f4">0.4959</td>
 							</tr>
-							<tr>
+							<tr class="highlight-box">
 								<td>month in year</td>
 								<td>10</td>
 								<td style="color: #a1c9f4">0.6667</td>
@@ -422,6 +421,7 @@
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
 					<h2>Padding the Sequence</h2>
+					<p>The pipeline works with equally-sized chunks</p>
 					<div class="r-vstack" style="display: flex; flex-direction: column">
 						<span>&vellip;</span>
 						<div
@@ -438,6 +438,7 @@
 							<span style="margin-left: 10px">patch $n_{patch}$</span>
 						</div>
 					</div>
+					<p class="fragment">NaN values are ignored during time feature creation</p>
 				</section>
 
 				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
@@ -598,8 +599,13 @@
               M &= softmax(A) X \Wv
               \end{aligned}
               $$ -->
-							$$ \begin{aligned} e_{ij} &= x_i \Wq (x_j {\Wk})^\trans \\ \alpha_{ij} &= exp(e_{ij}) /
-							\sum_k exp(e_{ik}) \\ y_i &= \sum_j \alpha_{ij} x_j \Wv \end{aligned} $$
+							$$ \begin{aligned} e_{ij} &= x_i \Wq (x_j {\Wk})^\trans \\
+							<!-- -->
+							\alpha_{ij} &= \frac{ exp(e_{ij}) }{ \sum_k exp(e_{ik}) }\\
+							<!-- -->
+							y_i &= \sum_j \alpha_{ij} x_j \Wv
+							<!-- -->
+							\end{aligned} $$
 						</p>
 						<div class="flex-container-row" style="width: 110%; position: relative">
 							<div>
@@ -638,9 +644,9 @@
 						<span class="papertitle">Time2Vec: Learning a Vector Representation of Time</span>
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
-					<p><span class="goal">Goal:</span> general model-agnostic plug-and-play feature</p>
+					<p><span class="goal">Goal:</span> General model-agnostic plug-and-play feature</p>
 					<p>
-						<span class="inspiration">Inspiration:</span> prior work
+						<span class="inspiration">Inspiration:</span> Prior work
 						<a href="https://arxiv.org/abs/1705.09137">📝</a> decomposed
 						<span class="highlight-blue">the values of</span> 1-dim time series into several sine functions
 						plus a linear function to extra- or interpolate the given signal
@@ -651,7 +657,7 @@
 						<span class="papertitle">Time2Vec: Learning a Vector Representation of Time</span>
 						<a href="https://arxiv.org/abs/1907.05321">📝</a>
 					</h5>
-					<p><span class="method">Method:</span> decompose time signal with periodic functions</p>
+					<p><span class="method">Method:</span> Decompose time signal with periodic functions</p>
 					$$ \tau_i(t) = \begin{cases} \omega_i t + \phi_i & \text{if } i = 0 \\ f(\omega_i t + \phi_i) &
 					\text{else} \end{cases}, \quad\text{for}\quad i = 1, \dots, d_{feat} $$
 					<div class="fragment">
@@ -679,9 +685,9 @@
 						>
 						<a href="https://arxiv.org/abs/2006.10739">📝</a>
 					</h5>
-					<p><span class="goal">Goal:</span> solve several CV tasks with MLPs + Fourier features</p>
+					<p><span class="goal">Goal:</span> Solve several CV tasks with MLPs + Fourier features</p>
 					<p>
-						<span class="inspiration">Inspiration:</span> prior work
+						<span class="inspiration">Inspiration:</span> Prior work
 						<a href="https://arxiv.org/abs/2003.08934">📝</a> &
 						<a href="https://arxiv.org/abs/1909.05215">📝</a> has experimentally found that a heuristic
 						sinusoidal mapping of input coordinates allows MLPs to represent higher frequency content
@@ -696,7 +702,7 @@
 						<a href="https://arxiv.org/abs/2006.10739">📝</a>
 					</h5>
 					<p>
-						<span class="method">Method:</span> special Fourier mapping that yields a stationary neural
+						<span class="method">Method:</span> Special Fourier mapping that yields a stationary neural
 						tangent kernel with tuneable bandwidth
 					</p>
 					<p>
@@ -741,9 +747,9 @@
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
 					<p>
-						<span class="goal">Goal:</span> improve absolute and relative encoding, not interested in time
-						as a feature pre se. For the absolute encoding, the focus is on making the auto-correlation of
-						positions more monotonous ("distance awareness")
+						<span class="goal">Goal:</span> Improve model performance, not interested in time as a feature
+						pre se. For the absolute encoding, the focus is on making the auto-correlation of positions more
+						monotonous ("distance awareness")
 					</p>
 					<p>
 						<span class="inspiration">Inspiration:</span> original position encoding
@@ -784,7 +790,19 @@
 						<a href="https://arxiv.org/abs/2305.16642">📝</a>
 					</h5>
 					<p><span class="method">Method (Part 2/2):</span> GPU-efficient relative encoding</p>
+					<p>
+						Learnable weights $w_{ij} \in \RR^{l_{patch}}$ that encode how the time feature in position $i$
+						relates to the one in position $j$
+					</p>
+					<p class="note-below">These weights are independent of the input</p>
 					<p></p>
+					<p class="fragment">
+						<span class="claim">Hypothesis:</span> Time series tasks do not profit from an <br />
+						(input-independent) relative encoding
+					</p>
+					<p class="note-below">
+						Step sizes $\Delta t$ may vary. Time stamp already encode relative information
+					</p>
 				</section>
 
 				<!-- [v1] Fri, 27 Sep 2024 -->
