@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+	<!-- Note: for PDF export, see https://revealjs.com/pdf-export/ and https://github.com/astefanutti/decktape -->
 	<head>
 		<!-- Set basic information -->
 		<meta charset="utf-8" />
@@ -999,6 +1000,8 @@
 				transition: "slide", // https://revealjs.com/transitions/
 				slideNumber: "h.v", // https://revealjs.com/slide-numbers/
 				viewDistance: 3,
+				pdfMaxPagesPerSlide: 1, // for PDF export
+
 				math: {
 					mathjax: "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
 					// mathjax: 'third_party/reveal.js/plugin/math/MathJax/es5/tex-chtml-full.js',
