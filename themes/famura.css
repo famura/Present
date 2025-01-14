@@ -33,15 +33,16 @@
   --heading6-size: 0.83em;
   --code-font: monospace;
   --dark-background-color: #222;
-  --dark-text-color: #222;
-  --bright-text-color: #f2f2f2;
+  --dark-text-color: #f2f2f2;
+  --bright-background-color: #f2f2f2;
+  --bright-text-color: #222;
+  --chapter-background-color: #d7d7d7;
   --title-color: #f6b26b; /* #ff5500 */
   --heading-color: #f6b26b;
   --link-color: #a23;
   --link-color-hover: #dd5566;
   --selection-background-color: #a23;
   --selection-color: #fff;
-  --bright-background-color: #d7d7d7;
   --author-color: #47abd3;
   --bright-orange: #f6b26b;
   --bright-blue: #47abd3;
@@ -69,8 +70,10 @@
 }
 
 .reveal-viewport {
-  background: var(--dark-background-color);
-  background-color: var(--dark-background-color);
+  background: var(--bright-background-color);
+  /* background: var(--dark-background-color); */
+  background: var(--bright-background-color);
+  /* background-color: var(--dark-background-color); */
 }
 
 .reveal {
@@ -78,6 +81,7 @@
   font-size: var(--font-size);
   font-weight: normal;
   color: var(--bright-text-color);
+  /* color: var(--dark-text-color); */
 }
 
 .reveal ::selection,
@@ -538,7 +542,7 @@ section.has-light-background h6 {
 
 /*********************************************
  * Chapter Break Slides
- * usage: <section data-background-color="var(--bright-background-color)" data-footer-class="newchap" class="newchap">
+ * usage: <section data-background-color="var(--chapter-background-color)" data-footer-class="newchap" class="newchap">
  * note: reveal.js will notice that you selected a light background and thus change the colors ect
          Do NOT set background or background-color since this leads to slow transitions with different speeds.
  *********************************************/
