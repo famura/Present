@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+	<!-- Note: for PDF export, see https://revealjs.com/pdf-export/ and https://github.com/astefanutti/decktape 
+   E.g., open file:///home/muf2rng/Software/famura/Present/index.html?print-pdf#/ in Chromium -->
+	<head>
+		<!-- Set basic information -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<head>
-  <!-- Set basic information -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<!-- Presentation-specific information -->
+		<meta name="author" content="Dr. Fabio Muratore" />
+		<meta name="description" content="SOME_TITLE" />
+		<title></title>
 
-  <!-- Presentation-specific information -->
-  <meta name="author" content="Dr. Fabio Muratore" />
-  <meta name="description" content="Presentation Template" />
-  <title></title>
-
-  <!-- Load a specific math font for MathJax (load this before reveal) -->
-  <!-- <script type="text/x-mathjax-config">
+		<!-- Load a specific math font for MathJax (load this before reveal) -->
+		<!-- <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       "HTML-CSS" : {
         availableFonts : ["TeX"],
@@ -23,118 +24,143 @@
     });   
   </script> -->
 
-  <!-- Core CSS files -->
-  <link rel="stylesheet" href="third_party/reveal.js/dist/reset.css" />
-  <link rel="stylesheet" href="third_party/reveal.js/dist/reveal.css" />
+		<!-- Core CSS files -->
+		<link rel="stylesheet" href="third_party/reveal.js/dist/reset.css" />
+		<link rel="stylesheet" href="third_party/reveal.js/dist/reveal.css" />
 
-  <!-- Theme used for syntax highlighted code -->
-  <link rel="stylesheet" href="third_party/reveal.js/plugin/highlight/monokai.css" id="highlight-theme" />
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="third_party/reveal.js/plugin/highlight/monokai.css" id="highlight-theme" />
 
-  <!-- Diagrams plugin, usually located at reveal.js/plugin/ but here they have been moved to third_party/ -->
-  <link rel="stylesheet" href="third_party/diagram/revealjs-diagram.css" />
+		<!-- Diagrams plugin, usually located at reveal.js/plugin/ but here they have been moved to third_party/ -->
+		<link rel="stylesheet" href="third_party/diagram/revealjs-diagram.css" />
 
-  <!-- Custom theme -->
-  <link rel="stylesheet" href="themes/famura.css" id="theme" />
+		<!-- Custom theme -->
+		<link rel="stylesheet" type="text/css" href="themes/famura.css" id="theme" />
+		<link rel="stylesheet" type="text/css" href="themes/shapes.css" />
 
-  <!-- Tab icon -->
-  <link rel="icon" href="content/logos/mechanical_arm.png" />
-</head>
+		<!-- Tab icon -->
+		<link rel="icon" href="content/logos/mechanical_arm.png" />
+	</head>
 
-<!-- =============================================================================================================== -->
+	<!-- ============================================================================================================= -->
 
-<body>
-  <div class="reveal">
-    <div class="slides">
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- ======================================================================================================= -->
 
-      <!-- ========================================================================================================= -->
+				<section data-state="no-slide-footer">
+					<h1 class="title">SOME_TITLE</h1>
+				</section>
 
-      <section data-state="no-slide-footer">
-        <h1 class="title">Title Text</h1>
-      </section>
+				<!-- ======================================================================================================= -->
+			</div>
+			<!-- slides -->
+		</div>
+		<!-- reveal -->
 
+		<!-- =========================================================================================================== -->
 
+		<script src="third_party/reveal.js/dist/reveal.js"></script>
+		<script src="third_party/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="third_party/reveal.js/plugin/math/math.js"></script>
+		<script src="third_party/reveal.js/plugin/search/search.js"></script>
+		<script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
+		<!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
+		<!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
+		<!-- <script src="third_party/reveald3/reveald3.js"></script> -->
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				controls: true, // controls
+				progress: true, // progress bar
+				history: true, // push each slide change to the browser history, implies hash: true
+				// width: "100%", // weird scaling of the \textwidth
+				center: true, // center vertically
+				transition: "slide", // https://revealjs.com/transitions/
+				slideNumber: "h.v", // https://revealjs.com/slide-numbers/
+				viewDistance: 3,
+				pdfMaxPagesPerSlide: 1, // for PDF export
 
-      <!-- ========================================================================================================= -->
+				math: {
+					mathjax: "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+					// mathjax: 'third_party/reveal.js/plugin/math/MathJax/es5/tex-chtml-full.js',
+					config: "TeX-AMS_HTML-full", // https://docs.mathjax.org/en/v2.7-latest/config-files.html
+					// Pass other options into `MathJax.Hub.Config()`
+					TeX: {
+						extensions: ["HTML.js", "color.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
+						inlineMath: [
+							["$", "$"],
+							["\\(", "\\)"],
+						], // inline symbols are not working for local mathjax
+						// packages: {"[+]": ["xcolor"]},
+						Macros: {
+							RR: "{\\bf R}",
+							trans: "{\\textsf{T}}" /* alternatively \\top or \\intercal */,
+							diff: "\\mathrm{d}",
+							bluexi: "{\\color{var(--bright-blue)} \\xi}",
+							bluephi: "{\\color{var(--bright-blue)} \\phi}",
+							redRRlpatch: "{\\color{var(--bright-red)} \\RR^{l_{patch}}}",
+							Wq: "W^{(q)}",
+							Wk: "W^{(k)}",
+							Wv: "W^{(v)}",
+							pk: "p^{(k)}",
+							pv: "p^{(v)}",
+							redP: "{\\color{var(--bright-red)} P}" /* or\ textcolor{var(--bright-red)}{P} */,
+							redpluspi: "{\\color{var(--bright-red)} + p_{i}}",
+							redpluspj: "{\\color{var(--bright-red)} + p_{j}}",
+							redpluspijk: "{\\color{var(--bright-red)} + p_{ij}^{(k)}}",
+							redpluspijv: "{\\color{var(--bright-red)} + p_{ij}^{(v)}}",
+							greypluspijq: "{\\color{var(--bright-grey)} + p_{ij}^{(v)}}",
+						},
+					},
+					"HTML-CSS": {
+						// https://docs.mathjax.org/en/v2.7-latest/options/output-processors/HTML-CSS.html#configure-html-css
+						scale: 80, // adjusts the container of mathjax equations
+					},
+					// reveald3: {
+					// 	// See doc at https://github.com/gcalmettes/reveal.js-d3
+					// 	runLastState: false, // default: true
+					// 	onSlideChangedDelay: 200, // in ms, default: 0
+					// },
+				},
+				plugins: [
+					// https://revealjs.com/plugins/
+					RevealZoom,
+					RevealSearch,
+					RevealMath,
+					RevealHighlight,
+					// Reveald3,
+				],
 
-    </div> <!-- slides -->
-  </div> <!-- reveal -->
+				dependencies: [
+					// { src: 'third_party/reveal.js/plugin/math/math.js', async: true }, // loads MathJax from the internet if not specified above (math: { ... mathjax: ... ) )
 
-  <!-- ============================================================================================================= -->
-
-  <script src="third_party/reveal.js/dist/reveal.js"></script>
-  <script src="third_party/reveal.js/plugin/highlight/highlight.js"></script>
-  <script src="third_party/reveal.js/plugin/math/math.js"></script>
-  <script src="third_party/reveal.js/plugin/search/search.js"></script>
-  <script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
-  <!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
-  <!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
-  <script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
-      controls: true, // controls
-      progress: true, // progress bar
-      history: true, // push each slide change to the browser history, implies hash: true
-      // width: '60%',  // weird scaling of the textwidth
-      center: true, // center vertically
-      transition: "slide", // https://revealjs.com/transitions/
-      slideNumber: "h.v", // https://revealjs.com/slide-numbers/
-      viewDistance: 3,
-      math: {
-        mathjax: "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
-        // mathjax: 'third_party/reveal.js/plugin/math/MathJax/es5/tex-chtml-full.js',
-        config: "TeX-AMS_HTML-full", // https://docs.mathjax.org/en/v2.7-latest/config-files.html
-        // Pass other options into `MathJax.Hub.Config()`
-        TeX: {
-          extensions: ["HTML.js"], // to use custom colors via \class{}{} https://stackoverflow.com/questions/44715432/how-to-define-custom-colors-in-mathjax-in-config
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ], // inline symbols are not working for local mathjax
-          //packages: {"[+]": ["xcolor", "csquotes"]},
-          Macros: {
-            RR: "{\\bf R}",
-            diff: "\\mathrm{d}",
-            bluexi: "{\\color{var(--bright-blue)} \\xi}",
-            bluephi: "{\\color{var(--bright-blue)} \\phi}",
-          },
-        },
-        "HTML-CSS": {
-          // https://docs.mathjax.org/en/v2.7-latest/options/output-processors/HTML-CSS.html#configure-html-css
-          scale: 80, // adjusts the container of mathjax equations
-        },
-      },
-      plugins: [RevealZoom, RevealSearch, RevealMath, RevealHighlight], // https://revealjs.com/plugins/
-
-      dependencies: [
-        // { src: 'third_party/reveal.js/plugin/math/math.js', async: true }, // loads MathJax from the internet if not specified above (math: { ... mathjax: ... ) )
-
-        // Headers and footers
-        {
-          src: "third_party/header-footer/header-footer.js",
-          async: true,
-          callback: function () {
-            slide_header.initialize({
-              header: {
-                // logoRight: "./content/logos/XYZ.png",
-                // logoLeft: "./content/logos/XYZ.png",
-                background: "rgba(170, 34, 51, 0)", // = #a23
-              },
-              footer: {
-                background: "rgba(170, 34, 51, 0)", // = #a23
-                // logoRight: "./content/logos/XYZ.png",
-                // logoLeft: "./content/logos/XYZ.png",
-                text: "Fabio (CR/AIR1) &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2022-12-13",
-              },
-            })
-          },
-        },
-        { src: "third_party/reveald3/reveald3.js" },
-      ],
-    }) // end Reveal.initialize()
-  </script>
-
-</body>
-
+					// Headers and footers
+					{
+						src: "third_party/header-footer/header-footer.js",
+						async: true,
+						callback: function () {
+							slide_header.initialize({
+								header: {
+									// logoRight: "./content/logos/XYZ.png",
+									// logoLeft: "./content/logos/XYZ.png",
+									background: "rgba(170, 34, 51, 0)", // = #a23
+								},
+								footer: {
+									background: "rgba(170, 34, 51, 0)", // = #a23
+									// logoRight: "./content/logos/XYZ.png",
+									// logoLeft: "./content/logos/XYZ.png",
+									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-14",
+								},
+							});
+						},
+					},
+					{ src: "third_party/reveald3/reveald3.js" },
+				],
+			}); // end Reveal.initialize()
+		</script>
+	</body>
 </html>
