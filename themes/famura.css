@@ -70,18 +70,18 @@
 }
 
 .reveal-viewport {
-  background: var(--bright-background-color);
-  /* background: var(--dark-background-color); */
-  background: var(--bright-background-color);
-  /* background-color: var(--dark-background-color); */
+  /* background: var(--bright-background-color); */
+  background: var(--dark-background-color);
+  /* background: var(--bright-background-color); */
+  background-color: var(--dark-background-color);
 }
 
 .reveal {
   font-family: var(--font);
   font-size: var(--font-size);
   font-weight: normal;
-  color: var(--bright-text-color);
-  /* color: var(--dark-text-color); */
+  /* color: var(--bright-text-color); */
+  color: var(--dark-text-color);
 }
 
 .reveal ::selection,
@@ -180,6 +180,11 @@ section.has-light-background h6 {
 .reveal p {
   margin: var(--block-margin);
   line-height: 1.3;
+}
+
+/* Override MathJax 2 display math margin (default is 1em = 34px, should be --block-margin) */
+.reveal .MathJax_Display {
+  margin: var(--block-margin) 0 !important;
 }
 
 /* Ensure certain elements are never larger than the slide itself */
@@ -338,10 +343,16 @@ section.has-light-background h6 {
   border-spacing: 0;
 }
 
+.reveal table.compact-table td,
+.reveal table.compact-table th {
+  padding-top: 0.05em;
+  padding-bottom: 0.05em;
+}
+
 .reveal .numeric td {
-    padding-top: 1px;
-    padding-bottom: 1px;
-  }
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
 
 .reveal table th {
   font-weight: bold;
@@ -475,7 +486,7 @@ section.has-light-background h6 {
 .reveal .slide-number {
   font-size: 3.5vh;
   right: 12px;
-  bottom: 0px;
+  bottom: 12px;
   color: var(--link-color);
   background: rgba(0, 0, 0, 0); /* transparent */
 }
@@ -536,6 +547,7 @@ section.has-light-background h6 {
   opacity: 1;
   visibility: inherit;
 }
+.reveal .slides .highlight-grey, /* independent of fraction*/
 .reveal .slides section .fragment.highlight-grey.visible {
   color: var(--bright-grey);
 }
@@ -602,6 +614,7 @@ section.has-light-background h6 {
 }
 
 .reveal .papertitle {
+  font-size: 80%;
   font-style: italic;
 }
 

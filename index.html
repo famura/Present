@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<!-- Note: for PDF export, see https://revealjs.com/pdf-export/ and https://github.com/astefanutti/decktape 
    E.g., open file:///home/muf2rng/Software/famura/Present/index.html?print-pdf#/ in Chromium -->
@@ -68,7 +68,8 @@
 		<script src="third_party/reveal.js/plugin/zoom/zoom.js"></script>
 		<!-- <script src="third_party/reveal.js/plugin/notes/notes.js"></script> -->
 		<!-- <script src="third_party/reveal.js/plugin/markdown/markdown.js"></script> -->
-		<!-- <script src="third_party/reveald3/reveald3.js"></script> -->
+		<!-- Comment back in if you want to use graphs -->
+		<script src="third_party/reveald3/reveald3.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -114,6 +115,9 @@
 							redpluspijk: "{\\color{var(--bright-red)} + p_{ij}^{(k)}}",
 							redpluspijv: "{\\color{var(--bright-red)} + p_{ij}^{(v)}}",
 							greypluspijq: "{\\color{var(--bright-grey)} + p_{ij}^{(v)}}",
+							CRPS: "\\operatorname{CRPS}",
+							SCRPS: "\\operatorname{SCRPS}",
+							QL: "\\operatorname{QL}",
 						},
 					},
 					"HTML-CSS": {
@@ -129,7 +133,8 @@
 				plugins: [
 					// https://revealjs.com/plugins/
 					RevealZoom,
-					RevealSearch,
+					// Comment back in if you want to use graphs
+					Reveald3,
 					RevealMath,
 					RevealHighlight,
 					// Reveald3,
@@ -152,7 +157,7 @@
 								footer: {
 									background: "rgba(170, 34, 51, 0)", // = #a23
 									// logoRight: "./content/logos/XYZ.png",
-									// logoLeft: "./content/logos/XYZ.png",
+									text: "Fabio Muratore &ensp; | &ensp; 2026-03-26",
 									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-14",
 								},
 							});
