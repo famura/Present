@@ -1,0 +1,274 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+
+	<!-- 1. Configure MathJax to recognize $ delimiters in this isolated file -->
+	<script>
+		MathJax = {
+			tex: {
+				inlineMath: [
+					["$", "$"],
+					["\\(", "\\)"],
+				],
+			},
+			startup: {
+				typeset: true,
+			},
+		};
+	</script>
+	<!-- 2. Load MathJax -->
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+	<style>
+		body {
+			margin: 0;
+			overflow: hidden;
+			font-family: sans-serif;
+		}
+		.flow-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			border: 2px solid #f6b26b;
+			border-radius: 8px;
+			background-color: #222;
+			color: #f2f2f2;
+			text-align: center;
+			box-sizing: border-box;
+			padding: 10px;
+			font-size: 24px;
+		}
+		.flow-line {
+			stroke: #bdecb6;
+			stroke-width: 3;
+			fill: none;
+		}
+		/* reveald3 will toggle this opacity */
+		.fragment-layer {
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+		}
+	</style>
+</head>
+<body>
+	<!-- viewBox creates a responsive canvas -->
+	<svg viewBox="0 0 1000 550" style="width: 100%; height: 600px">
+		<defs>
+			<marker
+				id="beginendmarker"
+				viewBox="0 0 10 10"
+				refX="5"
+				refY="5"
+				markerWidth="3"
+				markerHeight="3"
+				orient="auto"
+			>
+				<circle cx="5" cy="5" r="4" fill="rgb(189, 236, 182)" />
+			</marker>
+		</defs>
+
+		<!-- LEVEL 0: Start State -->
+		<g>
+			<foreignObject x="200" y="0" width="700" height="90">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">crps_integral()</p>
+					<p style="margin: 0">
+						$\text{CRPS}(F, y) = \int_{-\infty}^{\infty} \big( F(x) - 1_{x \ge y} \big)^2 dx = A - 0.5 D$
+					</p>
+				</div>
+			</foreignObject>
+		</g>
+
+		<!-- LEVEL 1: CRPS functions -->
+		<g id="frag1" class="fragment-layer">
+			<foreignObject x="150" y="150" width="400" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">crps_analytical_normal()</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="150" y="205" width="420" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">crps_analytical_studentt()</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="150" y="260" width="420" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">crps_ensemble()</p>
+				</div>
+			</foreignObject>
+			<line
+				x1="330"
+				y1="90"
+				x2="330"
+				y2="150"
+				class="flow-line"
+				marker-start="url(#beginendmarker)"
+				marker-end="url(#beginendmarker)"
+			/>
+		</g>
+
+		<!-- LEVEL 2: CRPS papers -->
+		<g id="frag2" class="fragment-layer">
+			<foreignObject x="100" y="385" width="300" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="color: #a23">🌐 Nvidia (2025)</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="50" y="440" width="300" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="color: #a23">📝 Jordan et al. (2019)</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="0" y="495" width="300" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="color: #a23">📝 Gneiting (2007)</p>
+				</div>
+			</foreignObject>
+			<!-- horizontal lines from the CRPS function to the papers-->
+			<line x1="150" y1="175" x2="23.5" y2="175" class="flow-line" marker-start="url(#beginendmarker)" />
+			<line x1="150" y1="230" x2="73.5" y2="230" class="flow-line" marker-start="url(#beginendmarker)" />
+			<line
+				x1="150"
+				y1="285"
+				x2="123.5"
+				y2="285"
+				class="flow-line"
+				stroke-dasharray="6, 4"
+				marker-start="url(#beginendmarker)"
+			/>
+			<!-- vertical lines from the CRPS function to the papers-->
+			<line x1="25" y1="175" x2="25" y2="495" class="flow-line" marker-end="url(#beginendmarker)" />
+			<line x1="75" y1="230" x2="75" y2="440" class="flow-line" marker-end="url(#beginendmarker)" />
+			<line
+				x1="125"
+				y1="285"
+				x2="125"
+				y2="385"
+				class="flow-line"
+				stroke-dasharray="6, 4"
+				marker-end="url(#beginendmarker)"
+			/>
+		</g>
+
+		<!-- LEVEL 3: A & D term -->
+		<g id="frag3" class="fragment-layer">
+			<foreignObject x="685" y="150" width="140" height="50">
+				<div xmlns="http://www.w3.org/1999/xhtml" class="flow-box" style="width: max-content">
+					<p style="margin: 0">$A$ and $D$</p>
+				</div>
+			</foreignObject>
+			<line
+				x1="520"
+				y1="175"
+				x2="685"
+				y2="175"
+				class="flow-line"
+				marker-start="url(#beginendmarker)"
+				marker-end="url(#beginendmarker)"
+			/>
+			<line x1="550" y1="230" x2="620" y2="230" class="flow-line" marker-start="url(#beginendmarker)" />
+			<line x1="620" y1="231.5" x2="620" y2="175" class="flow-line" />
+		</g>
+
+		<!-- LEVEL 4: SCRPS functions -->
+		<g id="frag4" class="fragment-layer">
+			<foreignObject x="555" y="320" width="450" height="60">
+				<div xmlns="http://www.w3.org/1999/xhtml" class="flow-box" style="width: max-content">
+					<p style="margin: 0">$\text{SCRPS}(F,y) = A/D + 0.5 \log(D) $</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="555" y="385" width="400" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">scrps_analytical_normal()</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="555" y="440" width="420" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">scrps_analytical_studentt()</p>
+				</div>
+			</foreignObject>
+			<foreignObject x="555" y="495" width="420" height="50">
+				<div
+					xmlns="http://www.w3.org/1999/xhtml"
+					class="flow-box"
+					style="flex-direction: column; width: max-content"
+				>
+					<p style="margin: 0; font-family: monospace">scrps_ensemble()</p>
+				</div>
+			</foreignObject>
+			<line
+				x1="745"
+				y1="200"
+				x2="745"
+				y2="320"
+				class="flow-line"
+				marker-start="url(#beginendmarker)"
+				marker-end="url(#beginendmarker)"
+			/>
+		</g>
+	</svg>
+
+	<script>
+		// This tells the reveald3 plugin how to build the fragments
+		var _transitions = [
+			{
+				transitionForward: () => (document.getElementById("frag1").style.opacity = 1),
+				transitionBackward: () => (document.getElementById("frag1").style.opacity = 0),
+				index: 0,
+			},
+			{
+				transitionForward: () => (document.getElementById("frag2").style.opacity = 1),
+				transitionBackward: () => (document.getElementById("frag2").style.opacity = 0),
+				index: 1,
+			},
+			{
+				transitionForward: () => (document.getElementById("frag3").style.opacity = 1),
+				transitionBackward: () => (document.getElementById("frag3").style.opacity = 0),
+				index: 2,
+			},
+			{
+				transitionForward: () => (document.getElementById("frag4").style.opacity = 1),
+				transitionBackward: () => (document.getElementById("frag4").style.opacity = 0),
+				index: 3,
+			},
+		];
+	</script>
+</body>
