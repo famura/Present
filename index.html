@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<!-- Note: for PDF export, see https://revealjs.com/pdf-export/ and https://github.com/astefanutti/decktape 
    E.g., open file:///home/muf2rng/Software/famura/Present/index.html?print-pdf#/ in Chromium -->
@@ -9,8 +9,8 @@
 
 		<!-- Presentation-specific information -->
 		<meta name="author" content="Dr. Fabio Muratore" />
-		<meta name="description" content="SOME_TITLE" />
-		<title></title>
+		<meta name="description" content="Bezier CDF" />
+		<title>Bezier CDF</title>
 
 		<!-- Load a specific math font for MathJax (load this before reveal) -->
 		<!-- <script type="text/x-mathjax-config">
@@ -50,7 +50,169 @@
 				<!-- ======================================================================================================= -->
 
 				<section data-state="no-slide-footer">
-					<h1 class="title">SOME_TITLE</h1>
+					<h1 class="title">Parametrizing a CDF like a French Automotive Engineer from the 60s</h1>
+				</section>
+
+				<! --------------------------------------------------------------------------------------------------------- -->
+
+				<section>
+					<h3>Describe a probability distribution</h3>
+					<div class="r-stack">
+						<object
+							type="image/svg+xml"
+							data="content/images/cdf_empty.svg"
+							class="full-svg fragment"
+							style="width: auto; height: 25vh; border-radius: 15px"
+						></object>
+						<object
+							type="image/svg+xml"
+							data="content/images/cdf_filled.svg"
+							class="full-svg fragment"
+							style="width: auto; height: 25vh; border-radius: 15px"
+						></object>
+					</div>
+				</section>
+
+				<section>
+					<h3 style="width: 108%; transform: translateX(-4%)">Every distribution can be defined by a CDF</h3>
+					<p>There are a few <span class="highlight-blue">constraints</span> to the CDF $F(X)$:</p>
+					<ul>
+						<li>Monotone and non-decreasing</li>
+						<li>$0 \leq F(x) \leq 1 \quad \forall x \in \text{domain}(X)$</li>
+						<li>$\lim_{x \to -\infty} F(x) = 0$ and $\lim_{x \to +\infty} F(x) = 1$</li>
+					</ul>
+				</section>
+
+				<! --------------------------------------------------------------------------------------------------------- -->
+
+				<section>
+					<h3>Detour: Did you ever use Inkscape?</h3>
+					<div class="flex-container-row fragment">
+						<img src="content/images/inkscape.png" style="width: 50%; height: auto; border-radius: 20px" />
+						<div class="column2">
+							<p>It has a very handy drawing tool for Bézier curves.</p>
+							<p>
+								These Bézier curves are a special type of polynomial which can be constrained to a
+								bounding box.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Definition of a Bézier curve</h3>
+					<p>
+						A <span class="highlight-blue">Bézier curve of degree $n$</span> is defined by
+						<span class="highlight-blue">$n+1$ control points</span> $P_i$ in normalized coordinates $t$
+						("time"): $$B_n(t) = \sum_{i=0}^{n} \binom{n}{i} t^i (1-t)^{n-i} P_i, \quad \text{with} \quad t
+						\in [0, 1]$$
+					</p>
+					<div class="fragment">
+						<p style="margin-top: 40px">Example for Bézier curves of degree 1 to 3</p>
+						<img
+							src="content/images/bezier_curves_1-3.png"
+							style="width: 70%; height: auto; margin-top: 0px"
+						/>
+					</div>
+					<p class="fragment">
+						The Bézier curve is named after French engineer Pierre Bézier, who used it in the 1960s for
+						designing curves for the bodywork of Renault cars.
+					</p>
+				</section>
+
+				<section>
+					<h3>Bézier curves are weighted combinations of Bernstein polynomials</h3>
+					<p>A <span class="highlight-blue">Bernstein polynomial of degree $n$</span> is defined as:</p>
+					<p>$$b_{i,n}(t) = \binom{n}{i} t^i (1-t)^{n-i}, \quad \text{with} \quad i = 0, \dots, n$$</p>
+					<div class="fragment">
+						<p>Compare this to the definitiion of the Bézier curve:</p>
+						<p>
+							$$B_n(t) = \sum_{i=0}^{n} \binom{n}{i} t^i (1-t)^{n-i} P_i, \quad \text{with} \quad t \in
+							[0, 1]$$
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Bernstein polynomials</h3>
+					<p>$$b_{i,n}(t) = \binom{n}{i} t^i (1-t)^{n-i}, \quad \text{with} \quad i = 0, \dots, n$$</p>
+					<img
+						src="content/images/bernstein_poly_8.png"
+						style="width: 50%; height: auto; margin-top: 0px; border-radius: 15px"
+						;
+					/>
+
+					<p>Interesting properties of Bernstein polynomials:</p>
+					<ul>
+						<li>They are non-negative: $b_{i,n}(t) \geq 0$ for all $t$ and $i$.</li>
+						<li>They sum to one: $\sum_{i=0}^{n} b_{i,n}(t) = 1$ for all $t$.</li>
+					</ul>
+				</section>
+
+				<! --------------------------------------------------------------------------------------------------------- -->
+
+				<section>
+					<img
+						src="content/images/meme_get_to_the_point.png"
+						style="width: 60%; height: auto; border-radius: 15px"
+					/>
+				</section>
+
+				<section>
+					<h3 style="width: 114%; transform: translateX(-7%)">Bézier/Bernstein parametrization of the CDF</h3>
+					<ol>
+						<li>
+							<span class="highlight-red">Bound the domain</span> of $X$ to $[L, U] \rightarrow t \in [0,
+							1]$
+						</li>
+						<div class="fragment">
+							<li>
+								Use a <span class="highlight-green">model's output $y \in \mathbb{R}^n$ as logits</span>
+							</li>
+							<ul>
+								<li class="fragment">
+									The dimensionality of the output determines the degree of the Bézier curve $n$
+								</li>
+								<li class="fragment">
+									<span class="highlight-blue">Normalize output $y$</span> $\rightarrow$ factor for
+									local probability mass $\Delta_i$ with
+									<span class="highlight-blue">$\sum_{i=0}^{n-1} \Delta_i = 1$</span> (e.g., via
+									softmax)
+								</li>
+								<li class="fragment">
+									The
+									<span class="highlight-blue"
+										>weighting factor from the Bernstein polynomials $b_{i,n}(t)$</span
+									>
+									is the cumulative sum
+									<span class="highlight-blue">$\beta_k = \sum_{i=0}^{k-1} \Delta_i$</span>
+								</li>
+							</ul>
+						</div>
+						<div class="fragment">
+							<li>
+								<p>
+									Compute the CDF as a weighted sum $$ B(t) = \sum_{i=0}^{n} \beta_i b_{i, n}(t),
+									\quad \text{with} \quad \beta_i \ge 0$$
+								</p>
+								<p>
+									The $\beta_i$ are the y-coordinates of the CDF's control points. Along the $X$-axis,
+									the control points are uniformly distributed at $t_i = \frac{i}{n}$.
+								</p>
+							</li>
+						</div>
+					</ol>
+				</section>
+
+				<section>
+					<h3>Properties of this Parametrization</h3>
+          <ul>
+            <li> <span class="highlight-green">Valid by construction</span>: the CDF is a convex combination of Bernstein polynomials</li>
+            <li> <span class="highlight-green">Unconstrained optimization</span>: useable any deep learning framework</li>
+            <li> <span class="highlight-green">Efficient implementation</span>: no numerical integration required since we are parametrizing a CDF</li>
+            <li> <span class="highlight-green">Flexible CDF</span>: model output dimension determines the flexibility of the CDF, <span class="highlight-red">but</span> $n>150$ causes numerical instability</li>
+            <li><span class="highlight-red">Slow error rate</span>: the worst-case pointwise approximation error converges at $O(1/n)$</li>
+            <li> <span class="highlight-red">Peak sharpness</span>: the standard deviation of the sharpest representable peak scales at $O(1/\sqrt{n})$.</li>
 				</section>
 
 				<!-- ======================================================================================================= -->
@@ -157,8 +319,7 @@
 								footer: {
 									background: "rgba(170, 34, 51, 0)", // = #a23
 									// logoRight: "./content/logos/XYZ.png",
-									text: "Fabio Muratore &ensp; | &ensp; 2026-03-26",
-									text: "Fabio Muratore &ensp; | &ensp; Robert Bosch GmbH &ensp; | &ensp; 2025-01-14",
+									text: "Fabio Muratore &ensp; | &ensp; 2026-04-23",
 								},
 							});
 						},
