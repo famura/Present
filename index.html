@@ -9,7 +9,7 @@
 
 		<!-- Presentation-specific information -->
 		<meta name="author" content="Dr. Fabio Muratore" />
-		<meta name="description" content="Bezier CDF" />
+		<meta name="description" content="Bézier CDF" />
 		<title>Bezier CDF</title>
 
 		<!-- Load a specific math font for MathJax (load this before reveal) -->
@@ -86,7 +86,7 @@
 				<! --------------------------------------------------------------------------------------------------------- -->
 
 				<section>
-					<h3>Detour: Did you ever use Inkscape?</h3>
+					<h3>Did you ever use Inkscape?</h3>
 					<div class="flex-container-row fragment">
 						<img
 							src="content/images/inkscape.png"
@@ -143,7 +143,7 @@
 					<p>$$b_{i,n}(t) = \binom{n}{i} t^i (1-t)^{n-i}, \quad \text{with} \quad i = 0, \dots, n$$</p>
 					<img
 						src="content/images/bernstein_poly_8.png"
-						style="width: auto; height: 250px; margin-top: 0px; border-radius: 15px"
+						style="width: auto; height: 250px; margin-top: 5px; margin-bottom: 5px; border-radius: 15px"
 						;
 					/>
 
@@ -411,7 +411,8 @@
 						<ul>
 							<li class="fragment">Precomputing of the binomial coefficients</li>
 							<li class="fragment">
-								Custom methods for `cdf`, `pdf`, and `rsample` (numerically stable and fast)
+								Custom methods for <code>cdf</code>, <code>pdf</code>, and
+								<code>rsample</code> (numerically stable and fast)
 							</li>
 							<li class="fragment">Highly parallelized code with GPU support</li>
 						</ul>
