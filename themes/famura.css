@@ -13,9 +13,9 @@
  *********************************************/
 :root {
   --font: Ubuntu, sans-serif;
-  --font-size: 34px; /* 34px without commenting in width: "100%" in index.html */
-  --block-margin: 20px;
-  --heading-margin: 0 0 20px 0;
+  --font-size: 30px; /* 34px without commenting in width: "100%" in index.html */
+  --block-margin: 18px;
+  --heading-margin: 0 0 18px 0;
   --heading-font: Ubuntu, sans-serif;
   --title-text-transform: uppercase;
   --heading-line-height: 1.2;
@@ -25,12 +25,12 @@
   --heading-font-weight: normal;
   --heading1-text-shadow: none;
   /* --heading1-text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15); */
-  --heading1-size: 2.85em;
-  --heading2-size: 2em;
-  --heading3-size: 1.5em;
-  --heading4-size: 1.17em;
-  --heading5-size: 1em;
-  --heading6-size: 0.83em;
+  --heading1-size: 2em;
+  --heading2-size: 1.5em;
+  --heading3-size: 1.17em;
+  --heading4-size: 1em;
+  --heading5-size: 0.83em;
+  --heading6-size: 0.67em;
   --code-font: monospace;
   --dark-background-color: #222;
   --dark-text-color: #f2f2f2;
@@ -413,7 +413,7 @@ section.has-light-background h6 {
 
 .reveal a:hover .r-frame {
   border-color: var(--link-color);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.55);
 }
 
 /*********************************************
@@ -580,7 +580,7 @@ section.has-light-background h6 {
   margin-top: 5vh;
   margin-bottom: 2vh;
   vertical-align: bottom !important;
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
 }
 
@@ -599,7 +599,7 @@ section.has-light-background h6 {
   display: flex;
   flex-direction: column;
   text-align: right;
-  margin-right: 20px;
+  margin-right: 18px;
 }
 
 .reveal .references-in-one-row-right-col {
@@ -625,9 +625,9 @@ section.has-light-background h6 {
   color: var(--dark-purple);
   font-size: 80%;
   margin-top: 0px;
-  margin-bottom: -20px; /* compensate for the top: -20px */
+  margin-bottom: -18px; /* compensate for the top: -20px */
   position: relative;
-  top: -20px;  /* the margin of a p-element */
+  top: -18px;  /* the margin of a p-element */
  }
 
  /*********************************************
@@ -731,7 +731,7 @@ section.has-light-background h6 {
 
 .reveal .box {
   background-color: #444444;
-  padding: 20px;
+  padding: 18px;
   border-radius: 10px;
   display: flex;
   align-items: center;
